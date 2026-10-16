@@ -2,26 +2,49 @@ import type React from "react";
 import { Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useInView } from "framer-motion";
-import { Menu, X, Home, Building2, Store, UtensilsCrossed, ChefHat, KeyRound, Armchair, Star, MessageCircle, MapPin, Phone, Mail, ChevronLeft, ChevronRight } from "lucide-react";
-import { EASE, Eyebrow, GoldButton, Img, MixedHeading, Reveal, Section, SectionHeader, TextArrowLink } from "@/components/lux";
+import { Menu, X, Star, MapPin, Phone, Mail, ChevronLeft, ChevronRight, Check, Lightbulb, Layers, Gem, Compass, Award, FileText, ArrowRight } from "lucide-react";
+import { EASE, Eyebrow, GoldButton, Img, MixedHeading, Reveal, Section, SectionHeader } from "@/components/lux";
 
-const U = "https://images.unsplash.com/";
+const C = "https://cargointerior.in/assets/";
+export const PHONE = "+91 90506 56162";
+export const TEL = "tel:+919050656162";
+export const WA = "https://wa.me/919050656162?text=" + encodeURIComponent("Hi, Cargo Interiors! I wanted to discuss about some interior designing project, Please reply. Thanks!");
+export const ADDRESS = "Badshahpur, Teekli Road, Gurugram, Haryana 122101";
+
 export const IMG = {
-  hero: [U + "photo-1618221195710-dd6b41faaea6", U + "photo-1600210492486-724fe5c67fb0", U + "photo-1600585154340-be6161a56a0c"],
-  about: U + "photo-1616486338812-3dadae4b4ace",
-  home: U + "photo-1586023492125-27b2c045efd7",
-  office: U + "photo-1497366216548-37526070297c",
-  showroom: U + "photo-1441986300917-64674bd600d8",
-  restaurant: U + "photo-1555396273-367ea4eb4db5",
-  kitchen: U + "photo-1556909114-f6e7ad7d3136",
-  p2: U + "photo-1600607687939-ce8a6c25118c",
-  wood: U + "photo-1541123437800-1bb1317badc2",
-  brass: U + "photo-1567016432779-094069958ea5",
-  marble: U + "photo-1615873968403-89e068629265",
-  before: U + "photo-1513694203232-719a280e022f",
+  hero: C + "hero-showroom-fDygwboA.jpg",
+  building: C + "carousel-1-DyvrDold.png",
+  showroom: C + "showroom-interior-BxKYR3o6.jpg",
+  office: C + "office-interior-CYVNJQ3h.jpg",
+  restaurant: C + "commercial-interior-CtszjJkO.jpg",
+  home: C + "home-interior-CgZJ5yi0.jpg",
+  render: C + "office-1-FkaATs4U.png",
+  p1: C + "project-1-9j_IZUTv.jpg",
+  p2: C + "project-2-asCQ2_h5.jpg",
+  p3: C + "project-3-ChLmGeNO.jpg",
 };
 
-const NAV = [["Home","/"],["About","/about"],["Services","/services"],["Projects","/projects"],["Process","/process"],["Contact","/contact"]] as const;
+const CLIENTS = [["Havas Media Network", "havas-B8V_d7lq.png"], ["Cyber City", "cybercity-MBf-cP86.png"], ["Cyber Hub", "cyberhub-CcHJ8010.png"], ["LG", "lg-BxpVnCWV.png"], ["Samsung", "samsung-BpmKfuIg.png"], ["Sagar Ratna", "sagarratna-CiHDlpoE.png"], ["Sobha City", "sobhacity-DrcX05Jo.png"], ["Eldeco", "eldeco-D5FLNlGC.png"]];
+
+const NAV = [
+  ["Home", "/"],
+  ["Interior Designer", "/interior-designer"],
+  ["Office Designer", "/office-designer"],
+  ["Showroom Designer", "/showroom-designer"],
+  ["Home Designer", "/home-designer"],
+  ["Portfolio", "/portfolio"],
+  ["About", "/about"],
+  ["Blog", "/blog"],
+] as const;
+
+function Logo() {
+  return (
+    <Link to="/" className="shrink-0 font-serif text-lg font-bold leading-tight tracking-wide sm:text-xl" aria-label="Cargo Interiors home">
+      <span className="block text-foreground">CARGO</span>
+      <span className="block text-gold">INTERIORS</span>
+    </Link>
+  );
+}
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -36,36 +59,35 @@ export function Navbar() {
     document.body.style.overflow = open ? "hidden" : "";
   }, [open]);
   return (
-    <header className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ease-lux ${scrolled ? "glass border-x-0 border-t-0" : "bg-background"}`}>
-      <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-5 sm:h-20 sm:px-8 lg:px-12" aria-label="Main">
-        <Link to="/" className="flex min-w-0 items-center gap-2 text-gold">
-          <svg viewBox="0 0 32 32" className="h-8 w-8 shrink-0" fill="none" stroke="currentColor" strokeWidth="1.2"><path d="M4 28V12L16 4l12 8v16M10 28V16h12v12M16 16v12" /></svg>
-          <span className="truncate font-display text-sm font-extrabold tracking-[0.2em] text-foreground sm:text-base">CARGO<span className="text-gold"> INTERIORS</span></span>
-        </Link>
-        <ul className="hidden items-center gap-1 lg:flex">
+    <header className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ease-lux ${scrolled ? "glass border-x-0 border-t-0" : "bg-gradient-to-b from-background/90 to-transparent"}`}>
+      <nav className="mx-auto flex h-18 max-w-[1440px] items-center justify-between gap-4 px-5 py-3 sm:px-8 xl:px-10" aria-label="Main">
+        <Logo />
+        <ul className="hidden items-center gap-1 xl:flex">
           {NAV.map(([n, to]) => (
             <li key={n}>
-              <Link to={to} activeOptions={{ exact: true }} className="rounded-full px-4 py-2 text-sm text-muted-foreground transition-colors hover:text-gold" activeProps={{ className: "bg-surface text-foreground" }}>{n}</Link>
+              <Link to={to} activeOptions={{ exact: true }} className="block max-w-[120px] px-3 py-2 text-[11px] leading-snug tracked text-muted-foreground transition-colors hover:text-gold" activeProps={{ className: "text-gold" }}>{n}</Link>
             </li>
           ))}
         </ul>
-        <a href="/contact" className="hidden min-h-11 items-center rounded-full border border-border bg-surface px-6 text-xs font-bold tracked text-foreground transition-colors hover:border-gold hover:text-gold lg:inline-flex">Contact Us</a>
-        <button onClick={() => setOpen(true)} aria-label="Open menu" className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-border text-foreground lg:hidden">
+        <Link to="/contact" className="hidden min-h-11 items-center rounded-2xl border border-gold/70 px-5 text-[11px] font-bold tracked text-gold transition-colors hover:bg-gold hover:text-primary-foreground xl:inline-flex">Book a Consultation</Link>
+        <button onClick={() => setOpen(true)} aria-label="Open menu" className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-border text-foreground xl:hidden">
           <Menu className="h-5 w-5" />
         </button>
       </nav>
       <AnimatePresence>
         {open && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4, ease: EASE }} className="fixed inset-0 z-50 flex h-dvh flex-col bg-background/95 backdrop-blur-xl lg:hidden">
-            <div className="flex h-16 items-center justify-end px-5 sm:h-20 sm:px-8">
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4, ease: EASE }} className="fixed inset-0 z-50 flex h-dvh flex-col overflow-y-auto bg-background/95 backdrop-blur-xl xl:hidden">
+            <div className="flex items-center justify-between px-5 py-3 sm:px-8">
+              <Logo />
               <button onClick={() => setOpen(false)} aria-label="Close menu" className="grid h-11 w-11 place-items-center rounded-full border border-border"><X className="h-5 w-5" /></button>
             </div>
-            <ul className="flex flex-1 flex-col items-center justify-center gap-2">
+            <ul className="flex flex-1 flex-col items-center justify-center gap-1 py-8">
               {NAV.map(([n, to], i) => (
-                <motion.li key={n} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05 * i, ease: EASE, duration: 0.6 }}>
-                  <Link onClick={() => setOpen(false)} to={to} activeOptions={{ exact: true }} activeProps={{ className: "text-gold" }} className="block px-6 py-3 font-display text-3xl font-extrabold text-foreground hover:text-gold">{n}</Link>
+                <motion.li key={n} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.04 * i, ease: EASE, duration: 0.6 }}>
+                  <Link onClick={() => setOpen(false)} to={to} activeOptions={{ exact: true }} activeProps={{ className: "text-gold" }} className="block px-6 py-2.5 text-center font-serif text-2xl font-bold text-foreground hover:text-gold sm:text-3xl">{n}</Link>
                 </motion.li>
               ))}
+              <li className="mt-6"><Link onClick={() => setOpen(false)} to="/contact" className="inline-flex min-h-12 items-center rounded-2xl bg-gold px-7 text-xs font-bold tracked text-primary-foreground">Book a Consultation</Link></li>
             </ul>
           </motion.div>
         )}
@@ -74,265 +96,95 @@ export function Navbar() {
   );
 }
 
-export function Hero() {
-  const [i, setI] = useState(0);
-  useEffect(() => {
-    const t = setInterval(() => setI((v) => (v + 1) % 3), 6000);
-    return () => clearInterval(t);
-  }, []);
-  const titles = ["The Aurelia Residence", "Noir Penthouse", "Villa Sandstone"];
-  return (
-    <section className="relative overflow-hidden pb-16 pt-24 sm:pb-24 sm:pt-32 lg:pb-32 lg:pt-40">
-      <span className="orb -left-20 top-40 h-72 w-72" />
-      <span className="orb right-0 top-1/2 h-96 w-96" />
-      <span aria-hidden className="watermark -bottom-4 left-0 text-[28vw] lg:text-[18rem]">CARGO</span>
-      <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-5 sm:px-8 lg:grid-cols-2 lg:gap-16 lg:px-12">
-        <div className="min-w-0">
-          <Reveal><Eyebrow>Designed for Elegance</Eyebrow></Reveal>
-          <h1 className="font-extrabold leading-[1.02] tracking-tight text-4xl sm:text-6xl xl:text-7xl">
-            {["Crafting Premium", "Luxury Interiors"].map((l, k) => (
-              <span key={l} className="block overflow-hidden pb-1">
-                <motion.span className={`block ${k ? "font-serif font-normal italic text-gold" : ""}`} initial={{ y: "110%" }} animate={{ y: 0 }} transition={{ duration: 0.9, ease: EASE, delay: 0.15 + k * 0.15 }}>{l}</motion.span>
-              </span>
-            ))}
-          </h1>
-          <Reveal delay={0.4}>
-            <p className="mt-6 max-w-md text-base font-light leading-relaxed text-muted-foreground sm:text-lg">Designing luxury spaces that speak your story — from bespoke homes to signature commercial interiors in Gurugram.</p>
-            <div className="mt-8 flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:gap-8">
-              <GoldButton>Book Consultation</GoldButton>
-              <TextArrowLink href="/projects">Our Work</TextArrowLink>
-            </div>
-          </Reveal>
-          <Reveal delay={0.55} className="glass mt-10 grid grid-cols-3 divide-x divide-border rounded-2xl py-4 sm:mt-12 sm:max-w-md">
-            {[["12+", "Years"], ["450+", "Projects"], ["98%", "Happy"]].map(([n, l]) => (
-              <div key={l} className="px-2 text-center">
-                <div className="font-display text-xl font-extrabold text-foreground sm:text-2xl">{n}</div>
-                <div className="tracked mt-1 text-[9px] text-muted-foreground sm:text-[10px]">{l}</div>
-              </div>
-            ))}
-          </Reveal>
-        </div>
+const FACTS = ["Well-designed showrooms can increase sales by up to 30%.", "Good office design boosts productivity by up to 20%.", "Lighting alone can change how long customers stay in a store."];
 
-        <Reveal delay={0.2} className="relative mx-auto w-full max-w-xl lg:max-w-none">
-          <div className="relative">
-            <div aria-hidden className="absolute -inset-3 translate-x-3 translate-y-3 rounded-[28px] border border-gold/25 sm:-inset-4 sm:translate-x-5 sm:translate-y-5" />
-            <div aria-hidden className="absolute -inset-1.5 rounded-[26px] border border-border" />
-            <div className="relative aspect-[4/5] overflow-hidden rounded-3xl border-[6px] border-surface sm:aspect-[5/6] sm:border-8">
-              <AnimatePresence mode="wait">
-                <motion.div key={i} className="absolute inset-0" initial={{ opacity: 0, scale: 1.06 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} transition={{ duration: 1, ease: EASE }}>
-                  <Img src={IMG.hero[i]!} alt={titles[i]!} />
-                </motion.div>
-              </AnimatePresence>
-            </div>
-            <div className="glass absolute -bottom-6 right-3 rounded-2xl px-4 py-3 sm:-right-4 sm:px-5 sm:py-4">
-              <div className="flex gap-1.5">{[0, 1, 2, 3, 4].map((d) => <span key={d} className="h-1.5 w-1.5 rounded-full bg-gold" />)}</div>
-              <div className="tracked mt-2 text-[9px] font-bold text-foreground sm:text-[10px]">Award Winning</div>
-              <div className="mt-1.5 h-px w-6 bg-gold" />
-            </div>
-          </div>
-          <div className="mt-12 flex items-end justify-between gap-4">
-            <div className="min-w-0">
-              <div className="tracked text-[10px] font-bold text-gold">Masterpiece</div>
-              <div className="truncate font-display text-lg font-extrabold sm:text-xl">{titles[i]}</div>
-            </div>
-            <div className="flex shrink-0 items-center gap-2">
-              <button aria-label="Previous" onClick={() => setI((i + 2) % 3)} className="grid h-11 w-11 place-items-center rounded-full border border-border hover:border-gold hover:text-gold"><ChevronLeft className="h-4 w-4" /></button>
-              <span className="font-display text-sm tabular-nums"><span className="text-foreground">0{i + 1}</span><span className="text-muted-foreground"> / 03</span></span>
-              <button aria-label="Next" onClick={() => setI((i + 1) % 3)} className="grid h-11 w-11 place-items-center rounded-full border border-border hover:border-gold hover:text-gold"><ChevronRight className="h-4 w-4" /></button>
-            </div>
+function DidYouKnow() {
+  const [i, setI] = useState(0);
+  const [n, setN] = useState(0);
+  const text = FACTS[i]!;
+  useEffect(() => {
+    if (n < text.length) {
+      const t = setTimeout(() => setN(n + 1), 35);
+      return () => clearTimeout(t);
+    }
+    const t = setTimeout(() => { setI((i + 1) % FACTS.length); setN(0); }, 3500);
+    return () => clearTimeout(t);
+  }, [n, i, text.length]);
+  return (
+    <div className="glass absolute bottom-24 right-4 hidden w-64 rounded-2xl p-5 md:block lg:right-8">
+      <div className="flex items-center gap-2 text-[10px] font-bold tracked text-gold"><Lightbulb className="h-4 w-4" />Did you know?</div>
+      <p className="mt-3 min-h-[60px] text-sm font-semibold text-foreground">{text.slice(0, n)}<span className="animate-pulse text-gold">|</span></p>
+    </div>
+  );
+}
+
+export function Hero() {
+  return (
+    <section className="relative flex min-h-[100svh] items-center justify-center overflow-hidden">
+      <motion.div className="absolute inset-0" initial={{ scale: 1.12 }} animate={{ scale: 1 }} transition={{ duration: 2.2, ease: EASE }}>
+        <img src={IMG.hero} alt="Premium showroom interior by Cargo Interiors" className="h-full w-full object-cover" fetchPriority="high" />
+      </motion.div>
+      <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/55 to-background" />
+      <div className="relative mx-auto w-full max-w-6xl px-5 pb-28 pt-28 text-center sm:px-8">
+        <motion.p initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: EASE, delay: 0.2 }} className="tracked text-[10px] text-gold sm:text-sm">Best Interior Designer in Gurugram</motion.p>
+        <h1 className="mt-5 font-serif font-bold leading-[1.05] text-[2.5rem] sm:text-6xl lg:text-7xl xl:text-[5.5rem]">
+          {["We Design Spaces That", "Sell, Scale & Impress"].map((l, k) => (
+            <span key={l} className="block overflow-hidden pb-2">
+              <motion.span className={`block ${k ? "text-gold" : "text-foreground"}`} initial={{ y: "110%" }} animate={{ y: 0 }} transition={{ duration: 1, ease: EASE, delay: 0.35 + k * 0.15 }}>{l}</motion.span>
+            </span>
+          ))}
+        </h1>
+        <Reveal delay={0.7}>
+          <p className="mx-auto mt-6 max-w-2xl text-base text-foreground/90 sm:text-xl">Showrooms that convert. Offices that inspire. Your trusted interior designer in Gurugram for spaces engineered for business impact.</p>
+          <div className="mt-10 flex flex-col items-stretch justify-center gap-4 sm:flex-row sm:items-center">
+            <a href={WA} target="_blank" rel="noreferrer" className="inline-flex min-h-14 items-center justify-center rounded-xl bg-gold px-10 text-xs font-bold tracked text-primary-foreground transition-all duration-500 ease-lux hover:-translate-y-0.5 hover:shadow-[0_10px_30px_-10px_var(--gold)] sm:text-sm">Book a Consultation</a>
+            <a href={TEL} className="inline-flex min-h-14 items-center justify-center rounded-xl border border-gold px-10 text-xs font-bold tracked text-gold transition-colors hover:bg-gold hover:text-primary-foreground sm:text-sm">Call Now</a>
           </div>
         </Reveal>
+      </div>
+      <div className="absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center gap-3">
+        <span className="h-14 w-px bg-gold/60 animate-scrollline" />
+        <span className="tracked text-[10px] text-muted-foreground">Scroll</span>
+      </div>
+      <DidYouKnow />
+    </section>
+  );
+}
+
+export function ClientsMarquee() {
+  const list = [...CLIENTS, ...CLIENTS];
+  return (
+    <section className="border-y border-border py-14 sm:py-20">
+      <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
+        <h2 className="text-3xl sm:text-4xl">Our Clients</h2>
+        <p className="tracked mt-2 text-[10px] text-muted-foreground sm:text-xs">Trusted by Brands</p>
+      </div>
+      <div className="relative mt-10 overflow-hidden [mask-image:linear-gradient(90deg,transparent,black_10%,black_90%,transparent)]">
+        <div className="flex w-max animate-marquee items-center gap-12 hover:[animation-play-state:paused] sm:gap-20">
+          {list.map(([n, f], k) => (
+            <img key={k} src={C + f} alt={n} loading="lazy" className="h-12 w-auto max-w-[160px] object-contain opacity-80 grayscale transition hover:opacity-100 hover:grayscale-0 sm:h-16" />
+          ))}
+        </div>
       </div>
     </section>
   );
 }
 
-export function About() {
+export function TextMarquee() {
+  const words = ["Showroom Interiors", "Office Interiors", "Restaurant & Café", "Home Interiors", "3D Visualization", "Turnkey Execution"];
+  const list = [...words, ...words];
   return (
-    <Section id="about" watermark="STUDIO">
-      <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
-        <Reveal className="relative order-2 mx-auto w-full max-w-lg lg:order-1">
-          <div aria-hidden className="absolute -inset-3 -translate-x-3 translate-y-3 rounded-[28px] border border-gold/25" />
-          <div className="relative aspect-[4/5] overflow-hidden rounded-3xl border-8 border-surface"><Img src={IMG.about} alt="Cargo Interiors studio" /></div>
-        </Reveal>
-        <Reveal className="order-1 lg:order-2">
-          <Eyebrow>About the Studio</Eyebrow>
-          <MixedHeading plain="Where Craft Meets" accent="Quiet Luxury" />
-          <p className="mt-6 text-base font-light leading-relaxed text-muted-foreground sm:text-lg">For over a decade, Cargo Interiors has shaped residences and commercial spaces across Gurugram with restraint, rich materials and meticulous execution.</p>
-          <p className="mt-4 text-base font-light leading-relaxed text-muted-foreground">Every project is designed in-house and built by our own craftsmen — one team, one vision, from sketch to handover.</p>
-          <div className="mt-8"><TextArrowLink href="/process">Discover Our Approach</TextArrowLink></div>
-        </Reveal>
-      </div>
-    </Section>
-  );
-}
-
-const SERVICES = [
-  { i: Home, t: "Home Interiors", d: "Residences tailored to how you live." },
-  { i: Building2, t: "Office Interiors", d: "Workspaces that inspire focus." },
-  { i: Store, t: "Showroom Design", d: "Retail stories that sell." },
-  { i: UtensilsCrossed, t: "Restaurant Interiors", d: "Atmosphere guests remember." },
-  { i: ChefHat, t: "Modular Kitchens", d: "Precision-built culinary spaces." },
-  { i: KeyRound, t: "Turnkey Execution", d: "One team, keys in hand." },
-  { i: Armchair, t: "Custom Furniture", d: "Handcrafted solid wood pieces." },
-];
-
-export function Services() {
-  return (
-    <Section id="services" className="bg-surface/40">
-      <span className="orb left-1/3 top-20 h-80 w-80" />
-      <SectionHeader eyebrow="What We Do" plain="Signature" accent="Services" />
-      <div className="grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
-        {SERVICES.map((s, k) => (
-          <Reveal key={s.t} delay={(k % 4) * 0.08} className="glass group rounded-3xl p-6 transition-all duration-700 ease-lux hover:-translate-y-1.5 hover:border-gold/50 sm:p-7">
-            <s.i className="h-8 w-8 text-gold" strokeWidth={1} />
-            <h3 className="mt-6 text-lg font-extrabold">{s.t}</h3>
-            <p className="mt-2 text-sm font-light text-muted-foreground">{s.d}</p>
-          </Reveal>
-        ))}
-        <Reveal className="flex items-center rounded-3xl border border-dashed border-gold/40 p-6 sm:p-7">
-          <TextArrowLink href="/contact">Start a Project</TextArrowLink>
-        </Reveal>
-      </div>
-    </Section>
-  );
-}
-
-export function Collections() {
-  const items: [string, string][] = [["Home", IMG.home], ["Office", IMG.office], ["Showroom", IMG.showroom], ["Restaurant", IMG.restaurant]];
-  return (
-    <Section watermark="COLLECTIONS">
-      <SectionHeader eyebrow="Collections" plain="Shop By" accent="Category" upper viewAll="View All Collections" />
-      <div className="grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4">
-        {items.map(([t, src], k) => (
-          <Reveal key={t} delay={k * 0.1} className={k % 2 ? "mt-8 sm:mt-12 lg:mt-16" : ""}>
-            <a href="/projects" className="group block">
-              <div className="aspect-[3/4] overflow-hidden rounded-2xl border border-border transition-all duration-700 ease-lux group-hover:-translate-y-2 group-hover:border-gold/50 sm:rounded-[32px]">
-                <Img src={src} alt={`${t} interiors`} className="transition-transform duration-700 ease-lux group-hover:scale-105" />
-              </div>
-              <div className="mt-3 flex items-center justify-between gap-2 sm:mt-4">
-                <h3 className="truncate text-base font-extrabold sm:text-xl">{t}</h3>
-                <span className="tracked hidden text-[10px] text-gold sm:inline">Explore</span>
-              </div>
-            </a>
-          </Reveal>
+    <div className="overflow-hidden border-y border-gold/20 bg-surface/50 py-5">
+      <div className="flex w-max animate-marquee items-center gap-10">
+        {list.map((w, k) => (
+          <span key={k} className="flex items-center gap-10 font-serif text-2xl font-bold text-foreground/80 sm:text-4xl">{w}<span className="text-gold">✦</span></span>
         ))}
       </div>
-    </Section>
+    </div>
   );
 }
 
-const PROJECTS = [
-  { t: "Aurelia Residence", c: "Residential", s: IMG.hero[0] },
-  { t: "Atlas HQ", c: "Commercial", s: IMG.office },
-  { t: "Maison Kitchen", c: "Residential", s: IMG.kitchen },
-  { t: "Ember Bistro", c: "Hospitality", s: IMG.restaurant },
-  { t: "Noir Penthouse", c: "Residential", s: IMG.p2 },
-  { t: "Linea Showroom", c: "Commercial", s: IMG.showroom },
-];
-
-export function Projects() {
-  const tabs = ["All", "Residential", "Commercial", "Hospitality"];
-  const [tab, setTab] = useState("All");
-  const list = PROJECTS.filter((p) => tab === "All" || p.c === tab);
-  return (
-    <Section id="projects" className="bg-surface/40">
-      <SectionHeader eyebrow="Portfolio" plain="Featured" accent="Projects" />
-      <div className="-mx-5 mb-8 overflow-x-auto px-5 sm:mx-0 sm:mb-10 sm:px-0" role="tablist">
-        <div className="flex w-max gap-2">
-          {tabs.map((t) => (
-            <button key={t} role="tab" aria-selected={tab === t} onClick={() => setTab(t)} className={`min-h-11 rounded-full border px-5 text-xs font-bold tracked transition-colors ${tab === t ? "border-gold bg-gold text-primary-foreground" : "border-border text-muted-foreground hover:text-foreground"}`}>{t}</button>
-          ))}
-        </div>
-      </div>
-      <motion.div layout className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        <AnimatePresence mode="popLayout">
-          {list.map((p) => (
-            <motion.article layout key={p.t} initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.96 }} transition={{ duration: 0.6, ease: EASE }} className="group relative aspect-[4/3] overflow-hidden rounded-3xl border border-border">
-              <Img src={p.s!} alt={p.t} className="transition-transform duration-700 ease-lux group-hover:scale-105" />
-              <div className="glass absolute inset-x-3 bottom-3 rounded-2xl px-4 py-3 sm:inset-x-4 sm:bottom-4">
-                <div className="tracked text-[10px] font-bold text-gold">{p.c}</div>
-                <h3 className="truncate text-lg font-extrabold">{p.t}</h3>
-              </div>
-            </motion.article>
-          ))}
-        </AnimatePresence>
-      </motion.div>
-    </Section>
-  );
-}
-
-export function Process() {
-  const steps: [string, string][] = [["Consultation", "We listen to your story and needs."], ["Concept", "Mood boards and spatial planning."], ["3D Design", "Photoreal renders before we build."], ["Materials", "Hand-picked finishes and samples."], ["Execution", "Our craftsmen build on site."], ["Handover", "Styled, cleaned and ready to live."]];
-  return (
-    <Section id="process" watermark="PROCESS">
-      <span className="orb right-10 top-1/3 h-80 w-80" />
-      <SectionHeader eyebrow="How We Work" plain="A Considered" accent="Process" />
-      <ol className="grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
-        {steps.map(([t, d], k) => (
-          <Reveal key={t} delay={(k % 3) * 0.1} className="glass relative rounded-3xl p-6 sm:p-8">
-            <span className="font-serif text-4xl italic text-gold sm:text-5xl">0{k + 1}</span>
-            <h3 className="mt-4 text-xl font-extrabold">{t}</h3>
-            <p className="mt-2 text-sm font-light text-muted-foreground">{d}</p>
-          </Reveal>
-        ))}
-      </ol>
-    </Section>
-  );
-}
-
-export function Materials() {
-  const m: [string, string, string][] = [["Solid Wood", "Teak, walnut and oak, hand-finished.", IMG.wood], ["Brushed Brass", "Warm metal accents that age gracefully.", IMG.brass], ["Natural Marble", "Italian and Indian stone, book-matched.", IMG.marble]];
-  return (
-    <Section className="bg-surface/40">
-      <SectionHeader eyebrow="Craftsmanship" plain="Materials With" accent="Soul" />
-      <div className="grid gap-5 md:grid-cols-3">
-        {m.map(([t, d, s], k) => (
-          <Reveal key={t} delay={k * 0.1} className="group">
-            <div className="aspect-[4/3] overflow-hidden rounded-3xl border border-border md:aspect-[3/4]"><Img src={s} alt={t} className="transition-transform duration-700 ease-lux group-hover:scale-105" /></div>
-            <h3 className="mt-4 text-xl font-extrabold">{t}</h3>
-            <p className="mt-1 text-sm font-light text-muted-foreground">{d}</p>
-          </Reveal>
-        ))}
-      </div>
-    </Section>
-  );
-}
-
-export function BeforeAfter() {
-  const [pos, setPos] = useState(50);
-  const ref = useRef<HTMLDivElement>(null);
-  const move = (x: number) => {
-    const r = ref.current?.getBoundingClientRect();
-    if (r) setPos(Math.min(100, Math.max(0, ((x - r.left) / r.width) * 100)));
-  };
-  return (
-    <Section>
-      <SectionHeader eyebrow="Transformation" plain="Before &" accent="After" />
-      <Reveal>
-        <div
-          ref={ref}
-          className="relative aspect-[4/3] touch-none select-none overflow-hidden rounded-3xl border border-border sm:aspect-[16/9]"
-          onPointerDown={(e) => { (e.target as HTMLElement).setPointerCapture(e.pointerId); move(e.clientX); }}
-          onPointerMove={(e) => e.buttons && move(e.clientX)}
-        >
-          <Img src={IMG.p2} alt="After renovation" />
-          <div className="absolute inset-0" style={{ clipPath: `inset(0 ${100 - pos}% 0 0)` }}>
-            <Img src={IMG.before} alt="Before renovation" className="grayscale" />
-          </div>
-          <span className="glass tracked absolute left-3 top-3 rounded-full px-3 py-1.5 text-[10px] font-bold sm:left-5 sm:top-5">Before</span>
-          <span className="glass tracked absolute right-3 top-3 rounded-full px-3 py-1.5 text-[10px] font-bold sm:right-5 sm:top-5">After</span>
-          <div className="absolute inset-y-0 w-px bg-gold" style={{ left: `${pos}%` }}>
-            <div className="absolute left-1/2 top-1/2 grid h-11 w-11 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-gold text-primary-foreground"><ChevronLeft className="h-4 w-4" /><ChevronRight className="-ml-2 h-4 w-4" /></div>
-          </div>
-          <input type="range" min={0} max={100} value={pos} onChange={(e) => setPos(+e.target.value)} aria-label="Before and after comparison" className="absolute inset-0 h-full w-full cursor-ew-resize opacity-0" />
-        </div>
-      </Reveal>
-    </Section>
-  );
-}
-
-export function Counter({ to, suffix }: { to: number; suffix: string }) {
+function Counter({ to, suffix }: { to: number; suffix: string }) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true });
   const [n, setN] = useState(0);
@@ -352,13 +204,13 @@ export function Counter({ to, suffix }: { to: number; suffix: string }) {
 }
 
 export function Stats() {
-  const s: [number, string, string][] = [[12, "+", "Years of Craft"], [450, "+", "Projects Delivered"], [60, "+", "In-house Artisans"], [98, "%", "Client Referrals"]];
+  const s: [number, string][] = [[10, "Years of Excellence"], [100, "Projects Delivered"], [80, "Professionals"], [15, "Cities Served"]];
   return (
-    <section className="relative border-y border-border py-14 sm:py-20">
+    <section className="py-14 sm:py-20">
       <div className="mx-auto grid max-w-7xl grid-cols-2 gap-y-10 px-5 sm:px-8 lg:grid-cols-4 lg:px-12">
-        {s.map(([n, suf, l]) => (
+        {s.map(([n, l]) => (
           <div key={l} className="text-center">
-            <div className="font-display text-4xl font-extrabold text-gold sm:text-5xl lg:text-6xl"><Counter to={n} suffix={suf} /></div>
+            <div className="font-serif text-4xl font-bold text-gold sm:text-5xl lg:text-6xl"><Counter to={n} suffix="+" /></div>
             <div className="tracked mt-3 text-[10px] text-muted-foreground sm:text-xs">{l}</div>
           </div>
         ))}
@@ -367,30 +219,217 @@ export function Stats() {
   );
 }
 
+export function About() {
+  return (
+    <Section watermark="CARGO">
+      <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
+        <Reveal>
+          <Eyebrow>The Brand</Eyebrow>
+          <MixedHeading plain="We Don't Decorate." accent="We Engineer Experiences." />
+          <p className="mt-6 text-base font-light leading-relaxed text-muted-foreground sm:text-lg">Founded in 2015 in Gurugram, Cargo Interiors is not your typical design firm. As a leading interior designer in Gurugram, we are strategic space planners who understand that every square foot is an asset — and every design decision impacts your bottom line.</p>
+          <p className="mt-4 text-base font-light leading-relaxed text-muted-foreground">From branded showrooms that turn walk-ins into buyers, to offices that attract top talent — we design with purpose, precision, and an obsession for premium execution. Led by Azam Saifi, our 80+ member team has delivered over 100 high-value projects across 15+ cities.</p>
+          <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
+            <GoldButton href="/about">Learn More About Us</GoldButton>
+            <a href={WA} target="_blank" rel="noreferrer" className="inline-flex min-h-11 items-center gap-2 text-xs font-bold tracked text-gold hover:text-foreground">Let's Talk <ArrowRight className="h-4 w-4" /></a>
+          </div>
+        </Reveal>
+        <Reveal delay={0.15} className="relative mx-auto w-full max-w-lg">
+          <div aria-hidden className="absolute -inset-3 translate-x-3 translate-y-3 rounded-[28px] border border-gold/25" />
+          <div className="relative aspect-[4/5] overflow-hidden rounded-3xl border-8 border-surface"><Img src={IMG.building} alt="Premium commercial building exterior design in Gurgaon" /></div>
+          <div className="glass absolute -bottom-6 left-4 rounded-2xl px-5 py-4 sm:-left-6">
+            <div className="font-serif text-xl font-bold text-gold">Since 2015</div>
+            <div className="tracked mt-1 text-[10px] text-muted-foreground">Gurugram, Haryana</div>
+          </div>
+        </Reveal>
+      </div>
+    </Section>
+  );
+}
+
+export const SERVICES = {
+  showroom: { t: "Showroom Interiors", img: IMG.showroom, d: "Your showroom is your brand's first handshake. We design retail environments rooted in customer psychology — strategic product placement, lighting that guides attention, and layouts that increase dwell time and conversions.", pts: ["Increase walk-in to purchase ratio", "Strategic product display psychology", "Brand-aligned spatial storytelling", "Premium material selection"], cta: "Discuss Your Showroom" },
+  office: { t: "Office Interiors", img: IMG.office, d: "Your office is a statement. To clients, it signals credibility. To employees, it signals ambition. We design workspaces that elevate productivity, reinforce brand identity, and make your company the place people want to be.", pts: ["Boost team productivity & morale", "Impress clients from the lobby", "Brand identity through spatial design", "Scalable layouts for growing teams"], cta: "Design Your Office" },
+  home: { t: "Home Interiors", img: IMG.home, d: "Bespoke residential design with premium materials, curated aesthetics, and white-glove execution for select clients who demand precision at home — from modular kitchens to bedrooms, living rooms and bathrooms.", pts: ["Complete home renovations", "Modular kitchen design", "Custom furniture & wardrobes", "Premium materials & finishes"], cta: "Design Your Home" },
+  restaurant: { t: "Restaurant & Café Interiors", img: IMG.restaurant, d: "Restaurants, cafés, and dining spaces designed to keep customers longer and coming back. Strategic ambiance design that elevates the dining experience.", pts: ["Ambiance & lighting design", "Efficient seating layouts", "Kitchen & service flow", "Memorable brand identity"], cta: "Plan Your Restaurant" },
+};
+export type ServiceKey = keyof typeof SERVICES;
+
+export function ServiceFeature({ k, flip = false }: { k: ServiceKey; flip?: boolean }) {
+  const s = SERVICES[k];
+  return (
+    <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-16">
+      <Reveal className={`aspect-[4/3] overflow-hidden rounded-3xl border border-border ${flip ? "lg:order-2" : ""}`}>
+        <Img src={s.img} alt={`${s.t} in Gurugram`} className="transition-transform duration-700 ease-lux hover:scale-105" />
+      </Reveal>
+      <Reveal delay={0.1}>
+        <span className="tracked text-[10px] font-bold text-gold">Primary Focus</span>
+        <h3 className="mt-3 text-3xl sm:text-4xl">{s.t}</h3>
+        <p className="mt-5 font-light leading-relaxed text-muted-foreground">{s.d}</p>
+        <ul className="mt-6 grid gap-3 sm:grid-cols-2">
+          {s.pts.map((p) => <li key={p} className="flex items-start gap-3 text-sm"><Check className="mt-0.5 h-4 w-4 shrink-0 text-gold" />{p}</li>)}
+        </ul>
+        <div className="mt-8"><GoldButton href={WA}>{s.cta}</GoldButton></div>
+      </Reveal>
+    </div>
+  );
+}
+
+export function ServicesShowcase() {
+  return (
+    <Section className="bg-surface/40">
+      <span className="orb left-1/3 top-20 h-80 w-80" />
+      <SectionHeader eyebrow="What We Build" plain="Spaces That" accent="Drive Revenue" />
+      <div className="space-y-16 sm:space-y-24">
+        <ServiceFeature k="showroom" />
+        <ServiceFeature k="office" flip />
+      </div>
+      <div className="mt-16 grid gap-5 sm:mt-24 md:grid-cols-2">
+        {([["restaurant", "/interior-designer"], ["home", "/home-designer"]] as const).map(([k, to], i) => (
+          <Reveal key={k} delay={i * 0.1}>
+            <Link to={to} className="group relative block aspect-[4/3] overflow-hidden rounded-3xl border border-border sm:aspect-[16/10]">
+              <Img src={SERVICES[k].img} alt={SERVICES[k].t} className="transition-transform duration-700 ease-lux group-hover:scale-105" />
+              <div className="glass absolute inset-x-3 bottom-3 rounded-2xl p-4 sm:inset-x-5 sm:bottom-5 sm:p-5">
+                <h3 className="text-xl sm:text-2xl">{SERVICES[k].t}</h3>
+                <p className="mt-1 line-clamp-2 text-sm text-muted-foreground">{SERVICES[k].d}</p>
+                <span className="tracked mt-3 inline-block text-[10px] font-bold text-gold">Learn More →</span>
+              </div>
+            </Link>
+          </Reveal>
+        ))}
+      </div>
+    </Section>
+  );
+}
+
+export function WhyUs() {
+  const items = [
+    [Layers, "Design + Execution", "We don't hand off drawings. We design, build, and deliver — end to end. One team. Zero gaps."],
+    [Compass, "Rapid Delivery", "Time is money. Our streamlined process and 80+ person team ensures your space is ready when you need it."],
+    [Gem, "Premium Materials", "We source materials that look exceptional and last. No shortcuts. No compromises on quality."],
+    [Lightbulb, "Strategic Design", "Every layout decision is backed by spatial psychology, brand strategy, and business objectives."],
+    [Award, "Proven Track Record", "100+ projects. 15+ cities. A decade of trust from business owners who don't settle for average."],
+    [FileText, "Transparent Process", "Detailed proposals, clear timelines, and honest communication. You always know where your project stands."],
+  ] as const;
+  return (
+    <Section watermark="WHY US">
+      <span className="orb right-10 top-1/3 h-80 w-80" />
+      <SectionHeader eyebrow="The Difference" plain="Why The Best" accent="Choose Us" />
+      <div className="grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
+        {items.map(([I, t, d], k) => (
+          <Reveal key={t} delay={(k % 3) * 0.08} className="glass group rounded-3xl p-6 transition-all duration-700 ease-lux hover:-translate-y-1.5 hover:border-gold/50 sm:p-8">
+            <I className="h-8 w-8 text-gold" strokeWidth={1} />
+            <h3 className="mt-6 text-xl">{t}</h3>
+            <p className="mt-2 text-sm font-light leading-relaxed text-muted-foreground">{d}</p>
+          </Reveal>
+        ))}
+      </div>
+    </Section>
+  );
+}
+
+export function Tech3D() {
+  return (
+    <Section className="bg-surface/40">
+      <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+        <Reveal>
+          <Eyebrow>Our Process</Eyebrow>
+          <MixedHeading plain="Where Technology Meets" accent="Interior Design" />
+          <p className="mt-6 font-light leading-relaxed text-muted-foreground sm:text-lg">Every project begins with a high-fidelity 3D visualization — so you experience your space before a single nail is driven.</p>
+          <ul className="mt-6 space-y-3">
+            {["Review & approve photo-realistic 3D renders", "No surprises — clear expectations from day one", "Execution mirrors the approved design with precision"].map((p) => <li key={p} className="flex items-start gap-3"><Check className="mt-1 h-4 w-4 shrink-0 text-gold" />{p}</li>)}
+          </ul>
+        </Reveal>
+        <Reveal delay={0.15} className="aspect-[4/3] overflow-hidden rounded-3xl border border-border">
+          <Img src={IMG.render} alt="3D visualization preview" />
+        </Reveal>
+      </div>
+    </Section>
+  );
+}
+
+export const PROJECTS = [
+  { c: "Office", t: "Corporate HQ Redesign", r: "40% increase in employee satisfaction", s: IMG.p1 },
+  { c: "Showroom", t: "Luxury Fashion Showroom", r: "2x increase in average dwell time", s: IMG.p2 },
+  { c: "Commercial", t: "Fine Dining Restaurant", r: "Premium brand perception established", s: IMG.p3 },
+  { c: "Showroom", t: "Premium Retail Showroom", r: "35% rise in walk-in conversions", s: IMG.showroom },
+  { c: "Office", t: "Modern Workspace", r: "Built for a fast-growing team", s: IMG.office },
+  { c: "Home", t: "Luxury Residence", r: "Bespoke living, white-glove execution", s: IMG.home },
+];
+
+export function ProjectCard({ p }: { p: (typeof PROJECTS)[number] }) {
+  return (
+    <article className="group">
+      <div className="aspect-[4/3] overflow-hidden rounded-lg">
+        <Img src={p.s} alt={`${p.t} - interior design project in Gurugram`} className="transition-transform duration-700 ease-lux group-hover:scale-105" />
+      </div>
+      <div className="tracked mt-5 text-[11px] text-gold">{p.c}</div>
+      <h3 className="mt-2 text-xl sm:text-2xl">{p.t}</h3>
+      <p className="mt-2 text-sm text-muted-foreground sm:text-base">{p.r}</p>
+      <a href={WA} target="_blank" rel="noreferrer" className="tracked mt-5 inline-flex min-h-11 items-center gap-2 border-b border-gold/60 text-[11px] text-gold transition-colors hover:text-foreground">Read More →</a>
+    </article>
+  );
+}
+
+export function FeaturedProjects({ all = false }: { all?: boolean }) {
+  const tabs = ["All", "Office", "Showroom", "Commercial", "Home"];
+  const [tab, setTab] = useState("All");
+  const base = all ? PROJECTS : PROJECTS.slice(0, 3);
+  const list = base.filter((p) => tab === "All" || p.c === tab);
+  return (
+    <Section>
+      <div className="mb-10 flex flex-col gap-6 sm:mb-14 md:flex-row md:items-end md:justify-between">
+        <Reveal>
+          <Eyebrow>Selected Work</Eyebrow>
+          <MixedHeading plain="Transformations" accent="That Speak" />
+        </Reveal>
+        {!all && <Link to="/portfolio" className="group inline-flex min-h-11 items-center gap-3 text-xs font-bold tracked hover:text-gold">View All Projects <ArrowRight className="h-4 w-4 text-gold" /></Link>}
+      </div>
+      {all && (
+        <div className="-mx-5 mb-10 overflow-x-auto px-5 sm:mx-0 sm:px-0" role="tablist">
+          <div className="flex w-max gap-2">
+            {tabs.map((t) => (
+              <button key={t} role="tab" aria-selected={tab === t} onClick={() => setTab(t)} className={`min-h-11 rounded-full border px-5 text-xs font-bold tracked transition-colors ${tab === t ? "border-gold bg-gold text-primary-foreground" : "border-border text-muted-foreground hover:text-foreground"}`}>{t}</button>
+            ))}
+          </div>
+        </div>
+      )}
+      <motion.div layout className="grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+        <AnimatePresence mode="popLayout">
+          {list.map((p) => (
+            <motion.div layout key={p.t} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.6, ease: EASE }}>
+              <ProjectCard p={p} />
+            </motion.div>
+          ))}
+        </AnimatePresence>
+      </motion.div>
+    </Section>
+  );
+}
+
 const REVIEWS = [
-  { q: "Cargo transformed our villa into something out of a magazine. Every detail was considered.", n: "Ananya & Rohit Mehra", r: "DLF Phase 5" },
-  { q: "They delivered our 20,000 sq ft office on time, with a finish that impresses every client.", n: "Vikram Sethi", r: "Founder, Atlas Capital" },
-  { q: "Our restaurant's ambience is now the reason guests come back. Truly exceptional team.", n: "Sana Kapoor", r: "Ember Bistro" },
+  { q: "Cargo Interiors transformed our showroom into a space that sells itself. Walk-in conversions went up 35% within the first month. They understand business, not just design.", n: "Rajiv Mehta", r: "Retail Brand Owner, Gurugram" },
+  { q: "Our new office became a recruiting tool. Candidates walk in and immediately want to work here. The Cargo team delivered on time, on budget, and beyond expectations.", n: "Priya Sharma", r: "Founder & CEO, Tech Startup" },
+  { q: "From concept to execution, their professionalism was unmatched. They handled everything — materials, contractors, timelines. We just watched our restaurant come to life.", n: "Khadak Singh", r: "Restaurant Owner, Delhi NCR" },
 ];
 
 export function Testimonials() {
   const [i, setI] = useState(0);
   const r = REVIEWS[i]!;
   return (
-    <Section watermark="LOVE" className="bg-surface/40">
+    <Section className="bg-surface/40">
       <span className="orb left-10 top-1/4 h-80 w-80" />
       <span className="orb bottom-0 right-10 h-72 w-72" />
-      <SectionHeader eyebrow="Testimonials" plain="Words From" accent="Our Clients" />
+      <SectionHeader eyebrow="Client Words" plain="Trusted by" accent="Decision Makers" />
       <div className="glass relative mx-auto max-w-3xl rounded-3xl p-6 sm:p-10 lg:p-12">
         <AnimatePresence mode="wait">
           <motion.figure key={i} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }} transition={{ duration: 0.6, ease: EASE }}>
             <div className="flex gap-1 text-gold">{[0, 1, 2, 3, 4].map((k) => <Star key={k} className="h-4 w-4 fill-current" />)}</div>
-            <blockquote className="mt-5 font-serif text-xl italic leading-snug text-foreground sm:text-2xl lg:text-3xl">"{r.q}"</blockquote>
-            <figcaption className="mt-6"><div className="font-extrabold">{r.n}</div><div className="tracked mt-1 text-[10px] text-gold">{r.r}</div></figcaption>
+            <blockquote className="mt-5 font-serif text-xl italic leading-snug text-foreground sm:text-2xl">"{r.q}"</blockquote>
+            <figcaption className="mt-6"><div className="font-bold">{r.n}</div><div className="tracked mt-1 text-[10px] text-gold">{r.r}</div></figcaption>
           </motion.figure>
         </AnimatePresence>
         <div className="mt-8 flex items-center justify-between gap-4">
-          <div className="flex gap-2">{REVIEWS.map((_, k) => <button key={k} onClick={() => setI(k)} aria-label={`Testimonial ${k + 1}`} className="grid h-11 w-8 place-items-center"><span className={`h-1 rounded-full transition-all ${k === i ? "w-6 bg-gold" : "w-3 bg-border"}`} /></button>)}</div>
+          <div className="flex gap-1">{REVIEWS.map((_, k) => <button key={k} onClick={() => setI(k)} aria-label={`Testimonial ${k + 1}`} className="grid h-11 w-8 place-items-center"><span className={`h-1 rounded-full transition-all ${k === i ? "w-6 bg-gold" : "w-3 bg-border"}`} /></button>)}</div>
           <div className="flex gap-2">
             <button aria-label="Previous" onClick={() => setI((i + 2) % 3)} className="grid h-11 w-11 place-items-center rounded-full border border-border hover:border-gold hover:text-gold"><ChevronLeft className="h-4 w-4" /></button>
             <button aria-label="Next" onClick={() => setI((i + 1) % 3)} className="grid h-11 w-11 place-items-center rounded-full border border-border hover:border-gold hover:text-gold"><ChevronRight className="h-4 w-4" /></button>
@@ -401,40 +440,62 @@ export function Testimonials() {
   );
 }
 
+export function CTA() {
+  return (
+    <section className="relative overflow-hidden py-20 sm:py-28">
+      <div className="absolute inset-0"><Img src={IMG.p2} alt="" /><div className="absolute inset-0 bg-background/85" /></div>
+      <Reveal className="relative mx-auto max-w-4xl px-5 text-center sm:px-8">
+        <p className="tracked text-[10px] text-gold sm:text-xs">Start Today</p>
+        <h2 className="mt-4 text-3xl leading-tight sm:text-5xl">If Your Space Doesn't Impress, <span className="block text-gold">It Doesn't Convert.</span></h2>
+        <p className="mx-auto mt-6 max-w-xl font-light text-muted-foreground sm:text-lg">Every day your space underperforms is revenue left on the table. Let's change that — with a complimentary design consultation.</p>
+        <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
+          <a href={WA} target="_blank" rel="noreferrer" className="inline-flex min-h-14 items-center justify-center rounded-xl bg-gold px-10 text-xs font-bold tracked text-primary-foreground">Start Your Project</a>
+          <a href={TEL} className="inline-flex min-h-14 items-center justify-center rounded-xl border border-gold px-10 text-xs font-bold tracked text-gold hover:bg-gold hover:text-primary-foreground">{PHONE}</a>
+        </div>
+      </Reveal>
+    </section>
+  );
+}
+
 export function Contact() {
   const [sent, setSent] = useState(false);
   const field = "min-h-12 w-full rounded-xl border border-border bg-background/40 px-4 text-sm text-foreground placeholder:text-muted-foreground focus:border-gold focus:outline-none";
   return (
-    <section id="contact" className="relative overflow-hidden py-16 sm:py-24 lg:py-32">
-      <div className="absolute inset-0"><Img src={IMG.hero[2]!} alt="" /><div className="absolute inset-0 bg-background/80" /></div>
-      <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-5 sm:px-8 lg:grid-cols-2 lg:gap-16 lg:px-12">
+    <section className="relative overflow-hidden py-16 sm:py-24">
+      <span className="orb left-0 top-10 h-80 w-80" />
+      <div className="relative mx-auto grid max-w-7xl items-start gap-10 px-5 sm:px-8 lg:grid-cols-2 lg:gap-16 lg:px-12">
         <Reveal>
-          <Eyebrow>Let's Create</Eyebrow>
-          <MixedHeading plain="Your Dream Space" accent="Starts Here" />
-          <p className="mt-6 max-w-md font-light text-muted-foreground">Book a complimentary consultation with our design team in Gurugram.</p>
-          <ul className="mt-8 space-y-4 text-sm">
-            <li className="flex items-center gap-3"><MapPin className="h-4 w-4 shrink-0 text-gold" />Golf Course Road, Gurugram, Haryana</li>
-            <li className="flex items-center gap-3"><Phone className="h-4 w-4 shrink-0 text-gold" /><a href="tel:+919999999999">+91 99999 99999</a></li>
-            <li className="flex items-center gap-3"><Mail className="h-4 w-4 shrink-0 text-gold" /><a href="mailto:hello@cargointeriors.in" className="break-all">hello@cargointeriors.in</a></li>
+          <Eyebrow>Let's Talk</Eyebrow>
+          <MixedHeading plain="Book a Free" accent="Design Consultation" />
+          <p className="mt-6 max-w-md font-light text-muted-foreground">Tell us about your space. We'll discuss your vision, assess your requirements and share a detailed proposal — at no obligation.</p>
+          <ul className="mt-8 space-y-5 text-sm">
+            <li className="flex items-start gap-3"><MapPin className="mt-0.5 h-5 w-5 shrink-0 text-gold" />{ADDRESS}</li>
+            <li className="flex items-center gap-3"><Phone className="h-5 w-5 shrink-0 text-gold" /><a href={TEL} className="hover:text-gold">{PHONE}</a></li>
+            <li className="flex items-center gap-3"><Mail className="h-5 w-5 shrink-0 text-gold" /><a href={WA} target="_blank" rel="noreferrer" className="hover:text-gold">Chat on WhatsApp</a></li>
           </ul>
         </Reveal>
         <Reveal delay={0.15}>
-          <form onSubmit={(e) => { e.preventDefault(); setSent(true); }} className="glass space-y-4 rounded-3xl p-5 sm:p-8">
+          <form onSubmit={(e) => {
+            e.preventDefault();
+            const f = new FormData(e.currentTarget);
+            const msg = `Hi Cargo Interiors! I'm ${f.get("name")} (${f.get("phone")}). Service: ${f.get("service") || "-"}. ${f.get("message") || ""}`;
+            window.open("https://wa.me/919050656162?text=" + encodeURIComponent(msg), "_blank");
+            setSent(true);
+          }} className="glass space-y-4 rounded-3xl p-5 sm:p-8">
             {sent ? (
-              <div className="py-12 text-center"><div className="font-serif text-3xl italic text-gold">Thank you</div><p className="mt-3 text-sm text-muted-foreground">We'll be in touch within 24 hours.</p></div>
+              <div className="py-12 text-center"><div className="font-serif text-3xl italic text-gold">Thank you</div><p className="mt-3 text-sm text-muted-foreground">Your message is ready in WhatsApp — we'll reply shortly.</p></div>
             ) : (
               <>
                 <div className="grid gap-4 sm:grid-cols-2">
-                  <input required aria-label="Name" placeholder="Your name" className={field} />
-                  <input required type="tel" aria-label="Phone" placeholder="Phone" className={field} />
+                  <input name="name" required aria-label="Name" placeholder="Your name" className={field} />
+                  <input name="phone" required type="tel" aria-label="Phone" placeholder="Phone" className={field} />
                 </div>
-                <input type="email" aria-label="Email" placeholder="Email" className={field} />
-                <select aria-label="Service" className={field} defaultValue="">
+                <select name="service" aria-label="Service" className={field} defaultValue="">
                   <option value="" disabled>Select a service</option>
-                  {SERVICES.map((s) => <option key={s.t}>{s.t}</option>)}
+                  {Object.values(SERVICES).map((s) => <option key={s.t}>{s.t}</option>)}
                 </select>
-                <textarea aria-label="Message" placeholder="Tell us about your space" rows={4} className={`${field} py-3`} />
-                <button type="submit" className="min-h-12 w-full rounded-full bg-gold text-xs font-bold tracked text-primary-foreground transition-opacity hover:opacity-90">Request Consultation</button>
+                <textarea name="message" aria-label="Message" placeholder="Tell us about your space" rows={4} className={`${field} py-3`} />
+                <button type="submit" className="min-h-12 w-full rounded-xl bg-gold text-xs font-bold tracked text-primary-foreground transition-opacity hover:opacity-90">Send on WhatsApp</button>
               </>
             )}
           </form>
@@ -445,40 +506,44 @@ export function Contact() {
 }
 
 export function Footer() {
-  const cols = [["Studio", ["About", "Process", "Projects", "Careers"]], ["Services", ["Home", "Office", "Showroom", "Kitchens"]], ["Connect", ["Instagram", "Pinterest", "LinkedIn", "WhatsApp"]]] as const;
   return (
     <footer className="border-t border-gold/30 pt-14 sm:pt-20">
       <div className="mx-auto grid max-w-7xl gap-10 px-5 sm:grid-cols-2 sm:px-8 lg:grid-cols-4 lg:px-12">
         <div>
-          <div className="font-display text-lg font-extrabold tracking-[0.2em]">CARGO<span className="text-gold"> INTERIORS</span></div>
-          <p className="mt-4 max-w-xs text-sm font-light text-muted-foreground">Luxury interior design and turnkey execution, Gurugram.</p>
+          <Logo />
+          <p className="mt-4 max-w-xs text-sm font-light text-muted-foreground">Leading interior designer in Gurugram since 2015. Showrooms, offices, restaurants and luxury homes.</p>
         </div>
-        {cols.map(([h, ls]) => (
-          <div key={h}>
-            <h4 className="tracked text-xs font-bold text-gold">{h}</h4>
-            <ul className="mt-4 space-y-1">{ls.map((l) => <li key={l}><a href="#" className="inline-block py-1.5 text-sm text-muted-foreground hover:text-foreground">{l}</a></li>)}</ul>
-          </div>
-        ))}
+        <div>
+          <h4 className="tracked font-sans text-xs font-bold text-gold">Services</h4>
+          <ul className="mt-4 space-y-1">{NAV.slice(1, 5).map(([n, to]) => <li key={n}><Link to={to} className="inline-block py-1.5 text-sm text-muted-foreground hover:text-foreground">{n}</Link></li>)}</ul>
+        </div>
+        <div>
+          <h4 className="tracked font-sans text-xs font-bold text-gold">Company</h4>
+          <ul className="mt-4 space-y-1">{([["Portfolio", "/portfolio"], ["About", "/about"], ["Blog", "/blog"], ["Contact", "/contact"]] as const).map(([n, to]) => <li key={n}><Link to={to} className="inline-block py-1.5 text-sm text-muted-foreground hover:text-foreground">{n}</Link></li>)}</ul>
+        </div>
+        <div>
+          <h4 className="tracked font-sans text-xs font-bold text-gold">Visit Us</h4>
+          <p className="mt-4 text-sm text-muted-foreground">{ADDRESS}</p>
+          <a href={TEL} className="mt-3 inline-block py-1.5 text-sm text-foreground hover:text-gold">{PHONE}</a>
+        </div>
       </div>
       <div className="mx-auto mt-12 flex max-w-7xl flex-col gap-2 border-t border-border px-5 py-6 text-xs text-muted-foreground sm:flex-row sm:justify-between sm:px-8 lg:px-12">
         <span>© {new Date().getFullYear()} Cargo Interiors. All rights reserved.</span>
-        <span>Crafted in Gurugram</span>
+        <span>Best Interior Designer in Gurugram</span>
       </div>
     </footer>
   );
 }
 
-
 export function PageHero({ eyebrow, plain, accent, text, img }: { eyebrow: string; plain: string; accent: string; text: string; img: string }) {
   return (
-    <section className="relative overflow-hidden pb-16 pt-32 sm:pb-24 sm:pt-40 lg:pb-28 lg:pt-48">
-      <div className="absolute inset-0"><Img src={img} alt="" /><div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/85 to-background" /></div>
-      <span className="orb -left-20 top-20 h-72 w-72" />
-      <div className="relative mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
-        <Reveal><Eyebrow>{eyebrow}</Eyebrow></Reveal>
-        <Reveal delay={0.1}><MixedHeading as="h1" plain={plain} accent={accent} /></Reveal>
-        <Reveal delay={0.2}><p className="mt-6 max-w-xl text-base font-light leading-relaxed text-muted-foreground sm:text-lg">{text}</p></Reveal>
-        <Reveal delay={0.3} className="mt-6 flex items-center gap-2 text-[10px] tracked text-muted-foreground"><Link to="/" className="hover:text-gold">Home</Link><span className="text-gold">/</span><span className="text-foreground">{plain} {accent}</span></Reveal>
+    <section className="relative overflow-hidden pb-16 pt-36 sm:pb-24 sm:pt-44 lg:pb-28 lg:pt-52">
+      <div className="absolute inset-0"><Img src={img} alt="" /><div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/75 to-background" /></div>
+      <div className="relative mx-auto max-w-4xl px-5 text-center sm:px-8">
+        <Reveal><p className="tracked text-[10px] text-gold sm:text-sm">{eyebrow}</p></Reveal>
+        <Reveal delay={0.1}><h1 className="mt-5 text-4xl leading-[1.08] sm:text-6xl lg:text-7xl">{plain} <span className="block text-gold">{accent}</span></h1></Reveal>
+        <Reveal delay={0.2}><p className="mx-auto mt-6 max-w-2xl text-base text-foreground/85 sm:text-lg">{text}</p></Reveal>
+        <Reveal delay={0.3} className="mt-6 flex items-center justify-center gap-2 text-[10px] tracked text-muted-foreground"><Link to="/" className="hover:text-gold">Home</Link><span className="text-gold">/</span><span className="text-foreground">{eyebrow}</span></Reveal>
       </div>
     </section>
   );
@@ -490,9 +555,12 @@ export function PageShell({ children }: { children: React.ReactNode }) {
       <Navbar />
       {children}
       <Footer />
-      <a href="https://wa.me/919999999999" target="_blank" rel="noreferrer" aria-label="Chat on WhatsApp" className="fixed bottom-4 right-4 z-40 grid h-14 w-14 place-items-center rounded-full bg-gold text-primary-foreground shadow-lg transition-transform hover:scale-105 sm:bottom-6 sm:right-6">
-        <MessageCircle className="h-6 w-6" />
-      </a>
+      <div className="fixed bottom-4 right-4 z-40 flex flex-col gap-3 sm:bottom-6 sm:right-6">
+        <a href={TEL} aria-label="Call Cargo Interiors" className="grid h-14 w-14 place-items-center rounded-full bg-gold text-primary-foreground shadow-lg transition-transform hover:scale-105"><Phone className="h-6 w-6" /></a>
+        <a href={WA} target="_blank" rel="noreferrer" aria-label="Chat on WhatsApp" className="grid h-14 w-14 place-items-center rounded-full bg-whatsapp text-foreground shadow-lg transition-transform hover:scale-105">
+          <svg viewBox="0 0 24 24" className="h-7 w-7" fill="currentColor" aria-hidden><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1s-.5-.1-.7.1-.8 1-1 1.2-.4.2-.7.1a8 8 0 0 1-4-3.5c-.3-.5.3-.5.9-1.6.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6a1.2 1.2 0 0 0-.9.4 3.7 3.7 0 0 0-1.1 2.8 6.5 6.5 0 0 0 1.3 3.4 14.6 14.6 0 0 0 5.6 5c2.1.9 2.9 1 4 .8a3.4 3.4 0 0 0 2.2-1.6 2.8 2.8 0 0 0 .2-1.6c-.1-.1-.3-.2-.6-.3zM12 21.8a9.8 9.8 0 0 1-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4A9.8 9.8 0 1 1 12 21.8zm8.4-18.2A11.8 11.8 0 0 0 1.8 17.8L.1 24l6.3-1.7a11.8 11.8 0 0 0 5.6 1.4A11.8 11.8 0 0 0 20.4 3.6z" /></svg>
+        </a>
+      </div>
     </main>
   );
 }

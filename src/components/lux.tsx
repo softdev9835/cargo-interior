@@ -30,9 +30,9 @@ export function Eyebrow({ children }: { children: ReactNode }) {
 
 export function MixedHeading({ plain, accent, upper, as: Tag = "h2", className = "" }: { plain: string; accent: string; upper?: boolean | undefined; as?: "h1" | "h2"; className?: string }) {
   return (
-    <Tag className={`font-extrabold leading-[1.05] tracking-tight text-foreground ${Tag === "h1" ? "text-4xl sm:text-5xl lg:text-6xl xl:text-7xl" : "text-3xl sm:text-4xl lg:text-5xl"} ${className}`}>
+    <Tag className={`font-serif font-bold leading-[1.08] text-foreground ${Tag === "h1" ? "text-4xl sm:text-5xl lg:text-6xl xl:text-7xl" : "text-3xl sm:text-4xl lg:text-5xl"} ${className}`}>
       <span className={upper ? "uppercase" : ""}>{plain}</span>{" "}
-      <span className="block font-serif font-normal italic text-gold">{accent}</span>
+      <span className="block text-gold">{accent}</span>
     </Tag>
   );
 }
@@ -85,5 +85,6 @@ export function Section({ id, children, className = "", watermark }: { id?: stri
 }
 
 export function Img({ src, alt, className = "" }: { src: string; alt: string; className?: string }) {
-  return <img src={`${src}?auto=format&fit=crop&w=1200&q=75&fm=webp`} alt={alt} loading="lazy" decoding="async" className={`h-full w-full object-cover ${className}`} />;
+  const url = src.includes("unsplash.com") ? `${src}?auto=format&fit=crop&w=1200&q=75&fm=webp` : src;
+  return <img src={url} alt={alt} loading="lazy" decoding="async" className={`h-full w-full object-cover ${className}`} />;
 }

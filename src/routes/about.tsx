@@ -1,20 +1,20 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { PageShell, PageHero, IMG, About, Stats, Materials, Testimonials } from "@/components/sections";
+import { PageShell, PageHero, IMG, About, Stats, WhyUs, ClientsMarquee, Testimonials, CTA } from "@/components/sections";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About Us — Cargo Interiors Gurugram" },
-      { name: "description", content: "Meet the Gurugram studio crafting quiet luxury interiors for over a decade." },
-      { property: "og:title", content: "About Us — Cargo Interiors Gurugram" },
-      { property: "og:description", content: "Meet the Gurugram studio crafting quiet luxury interiors for over a decade." },
+      { title: "About Us | Cargo Interiors" },
+      { name: "description", content: "Founded in 2015 by Azam Saifi, Cargo Interiors is a Gurugram interior design and execution firm with 80+ professionals and 100+ projects." },
+      { property: "og:title", content: "About Us | Cargo Interiors" },
+      { property: "og:description", content: "Founded in 2015 by Azam Saifi, Cargo Interiors is a Gurugram interior design and execution firm with 80+ professionals and 100+ projects." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: () => (
     <PageShell>
-      <PageHero eyebrow="Our Story" plain="About" accent="The Studio" text="A decade of designing and building refined spaces across Gurugram." img={IMG.about} /><About /><Stats /><Materials /><Testimonials />
+      <PageHero eyebrow="About Us" plain="Your Trusted" accent="Interior Designer" text="Founded in 2015 by Azam Saifi — from a small design studio to a full-service design and execution company." img={IMG.building} /><About /><Stats /><WhyUs /><ClientsMarquee /><Testimonials /><CTA />
     </PageShell>
   ),
 });

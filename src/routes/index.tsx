@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { PageShell, Hero, About, Services, Collections, Projects, Process, Materials, BeforeAfter, Stats, Testimonials, Contact } from "@/components/sections";
+import { PageShell, Hero, ClientsMarquee, Stats, About, TextMarquee, ServicesShowcase, WhyUs, Tech3D, FeaturedProjects, Testimonials, CTA, IMG } from "@/components/sections";
 
-const TITLE = "Cargo Interiors — Luxury Interior Designers in Gurugram";
-const DESC = "Designing luxury spaces that speak your story. Premium home, office, showroom and restaurant interiors in Gurugram.";
+const TITLE = "Cargo Interiors — Best Interior Designer in Gurugram";
+const DESC = "We design spaces that sell, scale & impress. Showroom, office, restaurant and home interiors in Gurugram since 2015.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -13,36 +13,24 @@ export const Route = createFileRoute("/")({
       { property: "og:description", content: DESC },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:image", content: IMG.hero },
+      { name: "twitter:image", content: IMG.hero },
     ],
-    scripts: [
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "InteriorDesigner",
-          name: "Cargo Interiors",
-          address: { "@type": "PostalAddress", addressLocality: "Gurugram", addressRegion: "Haryana", addressCountry: "IN" },
-        }),
-      },
-    ],
+    scripts: [{ type: "application/ld+json", children: JSON.stringify({ "@context": "https://schema.org", "@type": "InteriorDesigner", name: "Cargo Interiors", telephone: "+919050656162", foundingDate: "2015", address: { "@type": "PostalAddress", streetAddress: "Badshahpur, Teekli Road", addressLocality: "Gurugram", addressRegion: "Haryana", postalCode: "122101", addressCountry: "IN" } }) }],
   }),
-  component: Index,
-});
-
-function Index() {
-  return (
+  component: () => (
     <PageShell>
       <Hero />
-      <About />
-      <Services />
-      <Collections />
-      <Projects />
-      <Process />
-      <Materials />
-      <BeforeAfter />
+      <ClientsMarquee />
       <Stats />
+      <About />
+      <TextMarquee />
+      <ServicesShowcase />
+      <WhyUs />
+      <Tech3D />
+      <FeaturedProjects />
       <Testimonials />
-      <Contact />
+      <CTA />
     </PageShell>
-  );
-}
+  ),
+});
