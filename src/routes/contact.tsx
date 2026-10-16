@@ -4,17 +4,17 @@ import { PageShell, PageHero, IMG, Contact } from "@/components/sections";
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact — Cargo Interiors Gurugram" },
-      { name: "description", content: "Book a complimentary interior design consultation with Cargo Interiors in Gurugram." },
-      { property: "og:title", content: "Contact — Cargo Interiors Gurugram" },
-      { property: "og:description", content: "Book a complimentary interior design consultation with Cargo Interiors in Gurugram." },
+      { title: "Contact | Cargo Interiors" },
+      { name: "description", content: "Book a complimentary design consultation with Cargo Interiors. Call +91 90506 56162 or visit us at Badshahpur, Gurugram." },
+      { property: "og:title", content: "Contact | Cargo Interiors" },
+      { property: "og:description", content: "Book a complimentary design consultation with Cargo Interiors. Call +91 90506 56162 or visit us at Badshahpur, Gurugram." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: () => (
     <PageShell>
-      <PageHero eyebrow="Get in Touch" plain="Contact" accent="Us" text="Tell us about your space — we reply within 24 hours." img={IMG.hero[1]!} /><Contact />
+      <PageHero eyebrow="Contact" plain="Let's Build Something" accent="Remarkable" text="Call, WhatsApp or send us a message — we reply quickly." img={IMG.hero} /><Contact />
     </PageShell>
   ),
 });

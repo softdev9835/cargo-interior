@@ -29,6 +29,7 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
   --color-gold: var(--gold);
+  --color-whatsapp: var(--whatsapp);
   --color-surface: var(--surface);
   --color-light-card: var(--light-card);
   --color-light-card-foreground: var(--light-card-foreground);
@@ -59,7 +60,8 @@
   --border: oklch(1 0 0 / 12%);
   --input: oklch(1 0 0 / 16%);
   --ring: oklch(0.68 0.08 70);
-  --gold: oklch(0.68 0.08 70);
+  --gold: oklch(0.72 0.1 75);
+  --whatsapp: oklch(0.68 0.17 150);
   --surface: oklch(0.19 0 0);
   --light-card: oklch(0.96 0.01 80 / 92%);
   --light-card-foreground: oklch(0.15 0 0);
