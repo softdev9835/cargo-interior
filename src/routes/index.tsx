@@ -276,7 +276,7 @@ function Projects() {
         <AnimatePresence mode="popLayout">
           {list.map((p) => (
             <motion.article layout key={p.t} initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.96 }} transition={{ duration: 0.6, ease: EASE }} className="group relative aspect-[4/3] overflow-hidden rounded-3xl border border-border">
-              <Img src={p.s} alt={p.t} className="transition-transform duration-700 ease-lux group-hover:scale-105" />
+              <Img src={p.s!} alt={p.t} className="transition-transform duration-700 ease-lux group-hover:scale-105" />
               <div className="glass absolute inset-x-3 bottom-3 rounded-2xl px-4 py-3 sm:inset-x-4 sm:bottom-4">
                 <div className="tracked text-[10px] font-bold text-gold">{p.c}</div>
                 <h3 className="truncate text-lg font-extrabold">{p.t}</h3>
