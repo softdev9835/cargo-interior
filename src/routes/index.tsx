@@ -226,7 +226,7 @@ function Services() {
 }
 
 function Collections() {
-  const items = [["Home", IMG.home], ["Office", IMG.office], ["Showroom", IMG.showroom], ["Restaurant", IMG.restaurant]];
+  const items: [string, string][] = [["Home", IMG.home], ["Office", IMG.office], ["Showroom", IMG.showroom], ["Restaurant", IMG.restaurant]];
   return (
     <Section watermark="COLLECTIONS">
       <SectionHeader eyebrow="Collections" plain="Shop By" accent="Category" upper viewAll="View All Collections" />
@@ -290,7 +290,7 @@ function Projects() {
 }
 
 function Process() {
-  const steps = [["Consultation", "We listen to your story and needs."], ["Concept", "Mood boards and spatial planning."], ["3D Design", "Photoreal renders before we build."], ["Materials", "Hand-picked finishes and samples."], ["Execution", "Our craftsmen build on site."], ["Handover", "Styled, cleaned and ready to live."]];
+  const steps: [string, string][] = [["Consultation", "We listen to your story and needs."], ["Concept", "Mood boards and spatial planning."], ["3D Design", "Photoreal renders before we build."], ["Materials", "Hand-picked finishes and samples."], ["Execution", "Our craftsmen build on site."], ["Handover", "Styled, cleaned and ready to live."]];
   return (
     <Section id="process" watermark="PROCESS">
       <span className="orb right-10 top-1/3 h-80 w-80" />
@@ -309,7 +309,7 @@ function Process() {
 }
 
 function Materials() {
-  const m = [["Solid Wood", "Teak, walnut and oak, hand-finished.", IMG.wood], ["Brushed Brass", "Warm metal accents that age gracefully.", IMG.brass], ["Natural Marble", "Italian and Indian stone, book-matched.", IMG.marble]];
+  const m: [string, string, string][] = [["Solid Wood", "Teak, walnut and oak, hand-finished.", IMG.wood], ["Brushed Brass", "Warm metal accents that age gracefully.", IMG.brass], ["Natural Marble", "Italian and Indian stone, book-matched.", IMG.marble]];
   return (
     <Section className="bg-surface/40">
       <SectionHeader eyebrow="Craftsmanship" plain="Materials With" accent="Soul" />

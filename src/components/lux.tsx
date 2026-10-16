@@ -28,7 +28,7 @@ export function Eyebrow({ children }: { children: ReactNode }) {
   );
 }
 
-export function MixedHeading({ plain, accent, upper, as: Tag = "h2", className = "" }: { plain: string; accent: string; upper?: boolean; as?: "h1" | "h2"; className?: string }) {
+export function MixedHeading({ plain, accent, upper, as: Tag = "h2", className = "" }: { plain: string; accent: string; upper?: boolean | undefined; as?: "h1" | "h2"; className?: string }) {
   return (
     <Tag className={`font-extrabold leading-[1.05] tracking-tight text-foreground ${Tag === "h1" ? "text-4xl sm:text-5xl lg:text-6xl xl:text-7xl" : "text-3xl sm:text-4xl lg:text-5xl"} ${className}`}>
       <span className={upper ? "uppercase" : ""}>{plain}</span>{" "}
@@ -63,7 +63,7 @@ export function TextArrowLink({ children, href = "#" }: { children: ReactNode; h
   );
 }
 
-export function SectionHeader({ eyebrow, plain, accent, upper, viewAll }: { eyebrow: string; plain: string; accent: string; upper?: boolean; viewAll?: string }) {
+export function SectionHeader({ eyebrow, plain, accent, upper, viewAll }: { eyebrow: string; plain: string; accent: string; upper?: boolean | undefined; viewAll?: string }) {
   return (
     <div className="mb-10 flex flex-col gap-6 sm:mb-14 md:flex-row md:items-end md:justify-between">
       <Reveal className="min-w-0">
