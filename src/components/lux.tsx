@@ -45,7 +45,7 @@ export function CircleArrow({ className = "" }: { className?: string }) {
   );
 }
 
-export function GoldButton({ children, href = "#contact" }: { children: ReactNode; href?: string }) {
+export function GoldButton({ children, href = "/contact" }: { children: ReactNode; href?: string }) {
   return (
     <a href={href} className="group inline-flex min-h-11 items-center gap-3 rounded-full bg-gold px-6 py-3 text-xs font-bold tracked text-primary-foreground transition-all duration-500 ease-lux hover:-translate-y-0.5 hover:shadow-[0_10px_30px_-10px_var(--gold)] sm:px-7 sm:py-4">
       {children}
