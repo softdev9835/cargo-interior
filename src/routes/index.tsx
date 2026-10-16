@@ -147,7 +147,7 @@ function Hero() {
             <div className="relative aspect-[4/5] overflow-hidden rounded-3xl border-[6px] border-surface sm:aspect-[5/6] sm:border-8">
               <AnimatePresence mode="wait">
                 <motion.div key={i} className="absolute inset-0" initial={{ opacity: 0, scale: 1.06 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} transition={{ duration: 1, ease: EASE }}>
-                  <Img src={IMG.hero[i]} alt={titles[i]} />
+                  <Img src={IMG.hero[i]!} alt={titles[i]!} />
                 </motion.div>
               </AnimatePresence>
             </div>
@@ -402,7 +402,7 @@ const REVIEWS = [
 
 function Testimonials() {
   const [i, setI] = useState(0);
-  const r = REVIEWS[i];
+  const r = REVIEWS[i]!;
   return (
     <Section watermark="LOVE" className="bg-surface/40">
       <span className="orb left-10 top-1/4 h-80 w-80" />
@@ -433,7 +433,7 @@ function Contact() {
   const field = "min-h-12 w-full rounded-xl border border-border bg-background/40 px-4 text-sm text-foreground placeholder:text-muted-foreground focus:border-gold focus:outline-none";
   return (
     <section id="contact" className="relative overflow-hidden py-16 sm:py-24 lg:py-32">
-      <div className="absolute inset-0"><Img src={IMG.hero[2]} alt="" /><div className="absolute inset-0 bg-background/80" /></div>
+      <div className="absolute inset-0"><Img src={IMG.hero[2]!} alt="" /><div className="absolute inset-0 bg-background/80" /></div>
       <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-5 sm:px-8 lg:grid-cols-2 lg:gap-16 lg:px-12">
         <Reveal>
           <Eyebrow>Let's Create</Eyebrow>
