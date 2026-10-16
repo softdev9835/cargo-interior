@@ -1,15 +1,13 @@
 import type React from "react";
-import { Link } from "@tanstack/react-router";
+import { Link, useLocation } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useInView } from "framer-motion";
-import { Menu, X, Star, MapPin, Phone, Mail, ChevronLeft, ChevronRight, Check, Lightbulb, Layers, Gem, Compass, Award, FileText, ArrowRight } from "lucide-react";
+import { Menu, X, Star, MapPin, Phone, Mail, ChevronLeft, ChevronRight, Check, Lightbulb, Layers, Gem, Compass, Award, FileText, ArrowRight, ChevronDown, Plus } from "lucide-react";
 import { EASE, Eyebrow, GoldButton, Img, MixedHeading, Reveal, Section, SectionHeader } from "@/components/lux";
 
 const C = "https://cargointerior.in/assets/";
-export const PHONE = "+91 90506 56162";
-export const TEL = "tel:+919050656162";
-export const WA = "https://wa.me/919050656162?text=" + encodeURIComponent("Hi, Cargo Interiors! I wanted to discuss about some interior designing project, Please reply. Thanks!");
-export const ADDRESS = "Badshahpur, Teekli Road, Gurugram, Haryana 122101";
+export { CONTACT_INFO, PHONE, TEL, EMAIL, MAILTO, ADDRESS, WA, getWhatsAppUrl } from "@/config/contact";
+import { CONTACT_INFO, PHONE, TEL, EMAIL, MAILTO, ADDRESS, WA, getWhatsAppUrl } from "@/config/contact";
 
 export const IMG = {
   hero: C + "hero-showroom-fDygwboA.jpg",
@@ -33,8 +31,8 @@ const NAV = [
   ["Showroom Designer", "/showroom-designer"],
   ["Home Designer", "/home-designer"],
   ["Portfolio", "/portfolio"],
-  ["About", "/about"],
-  ["Blog", "/blog"],
+  // ["About", "/about"],
+  // ["Blog", "/blog"],
 ] as const;
 
 function Logo() {
@@ -49,27 +47,56 @@ function Logo() {
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const location = useLocation();
+  const currentPath = location.pathname.replace(/\/$/, "") || "/";
+
   useEffect(() => {
     const on = () => setScrolled(window.scrollY > 20);
     on();
     window.addEventListener("scroll", on, { passive: true });
     return () => window.removeEventListener("scroll", on);
   }, []);
+
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
   }, [open]);
+
   return (
     <header className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ease-lux ${scrolled ? "glass border-x-0 border-t-0" : "bg-gradient-to-b from-background/90 to-transparent"}`}>
-      <nav className="mx-auto flex h-18 max-w-[1440px] items-center justify-between gap-4 px-5 py-3 sm:px-8 xl:px-10" aria-label="Main">
+      <nav className="mx-auto flex h-20 max-w-[1440px] items-center justify-between gap-3 px-4 py-3 sm:px-6 xl:px-8" aria-label="Main">
         <Logo />
-        <ul className="hidden items-center gap-1 xl:flex">
-          {NAV.map(([n, to]) => (
-            <li key={n}>
-              <Link to={to} activeOptions={{ exact: true }} className="block max-w-[120px] px-3 py-2 text-[11px] leading-snug tracked text-muted-foreground transition-colors hover:text-gold" activeProps={{ className: "text-gold" }}>{n}</Link>
-            </li>
-          ))}
+        <ul className="hidden items-center gap-0.5 xl:flex 2xl:gap-1.5">
+          {NAV.map(([n, to]) => {
+            const isActive = to === "/" ? currentPath === "/" : currentPath === to;
+            return (
+              <li key={n} className="shrink-0">
+                <Link
+                  to={to}
+                  className={`relative block shrink-0 whitespace-nowrap px-2.5 py-2 text-[11px] font-medium uppercase tracking-[0.14em] transition-all duration-200 2xl:px-3.5 2xl:text-xs ${
+                    isActive
+                      ? "font-semibold text-gold"
+                      : "text-muted-foreground hover:text-gold"
+                  }`}
+                >
+                  {n}
+                  {/* {isActive && (
+                    <span className="absolute inset-x-2.5 bottom-0 h-[2px] rounded-full bg-gold shadow-[0_0_8px_rgba(212,175,55,0.7)] 2xl:inset-x-3.5" />
+                  )} */}
+                </Link>
+              </li>
+            );
+          })}
         </ul>
-        <Link to="/contact" className="hidden min-h-11 items-center rounded-2xl border border-gold/70 px-5 text-[11px] font-bold tracked text-gold transition-colors hover:bg-gold hover:text-primary-foreground xl:inline-flex">Book a Consultation</Link>
+        <Link
+          to="/contact"
+          className={`hidden min-h-11 shrink-0 whitespace-nowrap items-center rounded-2xl border px-4 text-[11px] font-bold uppercase tracking-[0.14em] transition-colors xl:inline-flex 2xl:px-5 ${
+            currentPath === "/contact"
+              ? "border-gold bg-gold text-primary-foreground"
+              : "border-gold/70 text-gold hover:bg-gold hover:text-primary-foreground"
+          }`}
+        >
+          Book a Consultation
+        </Link>
         <button onClick={() => setOpen(true)} aria-label="Open menu" className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-border text-foreground xl:hidden">
           <Menu className="h-5 w-5" />
         </button>
@@ -82,12 +109,35 @@ export function Navbar() {
               <button onClick={() => setOpen(false)} aria-label="Close menu" className="grid h-11 w-11 place-items-center rounded-full border border-border"><X className="h-5 w-5" /></button>
             </div>
             <ul className="flex flex-1 flex-col items-center justify-center gap-1 py-8">
-              {NAV.map(([n, to], i) => (
-                <motion.li key={n} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.04 * i, ease: EASE, duration: 0.6 }}>
-                  <Link onClick={() => setOpen(false)} to={to} activeOptions={{ exact: true }} activeProps={{ className: "text-gold" }} className="block px-6 py-2.5 text-center font-serif text-2xl font-bold text-foreground hover:text-gold sm:text-3xl">{n}</Link>
-                </motion.li>
-              ))}
-              <li className="mt-6"><Link onClick={() => setOpen(false)} to="/contact" className="inline-flex min-h-12 items-center rounded-2xl bg-gold px-7 text-xs font-bold tracked text-primary-foreground">Book a Consultation</Link></li>
+              {NAV.map(([n, to], i) => {
+                const isActive = to === "/" ? currentPath === "/" : currentPath === to;
+                return (
+                  <motion.li key={n} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.04 * i, ease: EASE, duration: 0.6 }}>
+                    <Link
+                      onClick={() => setOpen(false)}
+                      to={to}
+                      className={`block px-6 py-2.5 text-center font-serif text-2xl font-bold transition-colors sm:text-3xl ${
+                        isActive ? "text-gold" : "text-foreground hover:text-gold"
+                      }`}
+                    >
+                      {n}
+                    </Link>
+                  </motion.li>
+                );
+              })}
+              <li className="mt-6">
+                <Link
+                  onClick={() => setOpen(false)}
+                  to="/contact"
+                  className={`inline-flex min-h-12 items-center rounded-2xl px-7 text-xs font-bold uppercase tracking-wider transition-colors ${
+                    currentPath === "/contact"
+                      ? "bg-gold text-primary-foreground ring-2 ring-gold/40"
+                      : "bg-gold text-primary-foreground"
+                  }`}
+                >
+                  Book a Consultation
+                </Link>
+              </li>
             </ul>
           </motion.div>
         )}
@@ -440,6 +490,116 @@ export function Testimonials() {
   );
 }
 
+const FAQS = [
+  {
+    q: "What types of projects does Cargo Interiors handle?",
+    a: "We specialize in end-to-end luxury commercial and residential interiors across Gurugram and Delhi NCR — including retail showrooms, corporate offices, restaurants & cafes, healthcare clinics, and bespoke turnkey residences.",
+  },
+  {
+    q: "How does the design process work?",
+    a: "Our structured 5-step process starts with a discovery consultation and site survey, followed by conceptual layouts, photorealistic 3D renders, transparent material/BOQ pricing, and dedicated white-glove site execution with on-time handover.",
+  },
+  {
+    q: "Do you provide 3D renders before starting work?",
+    a: "Yes, absolutely. We provide photorealistic 3D architectural renders and virtual walkthroughs before physical construction begins. You see and approve every texture, lighting fixture, and spatial layout in advance.",
+  },
+  {
+    q: "What is the typical project timeline?",
+    a: "Timelines vary by scope: retail showrooms and commercial offices typically take 30 to 60 days, while comprehensive luxury home fit-outs require 45 to 90 days. We provide a guaranteed milestone schedule before commencement.",
+  },
+  {
+    q: "Which cities do you operate in?",
+    a: "Our headquarters and design studio are located in Gurugram. We actively execute projects throughout Gurugram (Golf Course Road, Cyber City, Sohna Road), South Delhi, Noida, and across the Delhi NCR region.",
+  },
+  {
+    q: "How do I get started?",
+    a: `You can book a free design consultation through our contact form, call us directly at ${PHONE}, or connect with us on WhatsApp. Our design team will schedule a site visit or studio discussion within 24 hours.`,
+  },
+];
+
+export function FAQ() {
+  const [openIdx, setOpenIdx] = useState<number | null>(null);
+
+  const toggle = (i: number) => {
+    setOpenIdx(openIdx === i ? null : i);
+  };
+
+  return (
+    <Section className="relative overflow-hidden py-20 sm:py-28">
+      <span className="orb left-1/2 -top-24 h-96 w-96 -translate-x-1/2" />
+      <div className="relative mx-auto max-w-5xl px-5 sm:px-8">
+        <div className="text-center">
+          <Reveal>
+            <p className="tracked text-[11px] font-bold text-gold sm:text-xs">COMMON QUESTIONS</p>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <h2 className="mt-3 font-serif text-3xl font-bold tracking-tight sm:text-5xl lg:text-6xl text-foreground">
+              Frequently <span className="text-gold">Asked</span>
+            </h2>
+          </Reveal>
+          <Reveal delay={0.2}>
+            <p className="mx-auto mt-4 max-w-xl text-sm font-light text-muted-foreground sm:text-base">
+              Everything you need to know about our interior design, 3D visualization, and execution process.
+            </p>
+          </Reveal>
+        </div>
+
+        <div className="mt-12 space-y-3.5 sm:mt-16 sm:space-y-4">
+          {FAQS.map((faq, i) => {
+            const isOpen = openIdx === i;
+            return (
+              <Reveal key={faq.q} delay={0.05 * i}>
+                <div
+                  className={`overflow-hidden rounded-2xl border transition-all duration-300 ${
+                    isOpen
+                      ? "border-gold/60 bg-card/85 shadow-[0_4px_30px_rgba(212,175,55,0.08)]"
+                      : "border-border/70 bg-card/40 hover:border-gold/30 hover:bg-card/65"
+                  }`}
+                >
+                  <button
+                    type="button"
+                    onClick={() => toggle(i)}
+                    className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left transition-colors cursor-pointer sm:px-7 sm:py-6"
+                    aria-expanded={isOpen}
+                  >
+                    <span className="font-serif text-base font-semibold text-foreground sm:text-lg">
+                      {faq.q}
+                    </span>
+                    <span
+                      className={`grid h-8 w-8 shrink-0 place-items-center rounded-full border transition-all duration-300 ${
+                        isOpen
+                          ? "border-gold bg-gold/15 text-gold rotate-45"
+                          : "border-border text-muted-foreground"
+                      }`}
+                    >
+                      <Plus className="h-4 w-4" />
+                    </span>
+                  </button>
+
+                  <AnimatePresence initial={false}>
+                    {isOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.35, ease: EASE }}
+                      >
+                        <div className="border-t border-border/50 px-6 pb-6 pt-3 text-sm font-light leading-relaxed text-muted-foreground sm:px-7 sm:text-base">
+                          {faq.a}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              </Reveal>
+            );
+          })}
+        </div>
+      </div>
+    </Section>
+  );
+}
+
 export function CTA() {
   return (
     <section className="relative overflow-hidden py-20 sm:py-28">
@@ -459,6 +619,20 @@ export function CTA() {
 
 export function Contact() {
   const [sent, setSent] = useState(false);
+  const [service, setService] = useState("");
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   const field = "min-h-12 w-full rounded-xl border border-border bg-background/40 px-4 text-sm text-foreground placeholder:text-muted-foreground focus:border-gold focus:outline-none";
   return (
     <section className="relative overflow-hidden py-16 sm:py-24">
@@ -469,9 +643,13 @@ export function Contact() {
           <MixedHeading plain="Book a Free" accent="Design Consultation" />
           <p className="mt-6 max-w-md font-light text-muted-foreground">Tell us about your space. We'll discuss your vision, assess your requirements and share a detailed proposal — at no obligation.</p>
           <ul className="mt-8 space-y-5 text-sm">
-            <li className="flex items-start gap-3"><MapPin className="mt-0.5 h-5 w-5 shrink-0 text-gold" />{ADDRESS}</li>
+            <li className="flex items-start gap-3"><MapPin className="mt-0.5 h-5 w-5 shrink-0 text-gold" /><a href={CONTACT_INFO.googleMapsQueryUrl} target="_blank" rel="noreferrer" className="hover:text-gold">{ADDRESS}</a></li>
             <li className="flex items-center gap-3"><Phone className="h-5 w-5 shrink-0 text-gold" /><a href={TEL} className="hover:text-gold">{PHONE}</a></li>
-            <li className="flex items-center gap-3"><Mail className="h-5 w-5 shrink-0 text-gold" /><a href={WA} target="_blank" rel="noreferrer" className="hover:text-gold">Chat on WhatsApp</a></li>
+            <li className="flex items-center gap-3"><Mail className="h-5 w-5 shrink-0 text-gold" /><a href={MAILTO} className="hover:text-gold">{EMAIL}</a></li>
+            <li className="flex items-center gap-3">
+              <svg viewBox="0 0 24 24" className="h-5 w-5 shrink-0 text-gold" fill="currentColor" aria-hidden><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1s-.5-.1-.7.1-.8 1-1 1.2-.4.2-.7.1a8 8 0 0 1-4-3.5c-.3-.5.3-.5.9-1.6.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6a1.2 1.2 0 0 0-.9.4 3.7 3.7 0 0 0-1.1 2.8 6.5 6.5 0 0 0 1.3 3.4 14.6 14.6 0 0 0 5.6 5c2.1.9 2.9 1 4 .8a3.4 3.4 0 0 0 2.2-1.6 2.8 2.8 0 0 0 .2-1.6c-.1-.1-.3-.2-.6-.3zM12 21.8a9.8 9.8 0 0 1-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4A9.8 9.8 0 1 1 12 21.8zm8.4-18.2A11.8 11.8 0 0 0 1.8 17.8L.1 24l6.3-1.7a11.8 11.8 0 0 0 5.6 1.4A11.8 11.8 0 0 0 20.4 3.6z" /></svg>
+              <a href={WA} target="_blank" rel="noreferrer" className="hover:text-gold">Chat on WhatsApp</a>
+            </li>
           </ul>
         </Reveal>
         <Reveal delay={0.15}>
@@ -479,7 +657,7 @@ export function Contact() {
             e.preventDefault();
             const f = new FormData(e.currentTarget);
             const msg = `Hi Cargo Interiors! I'm ${f.get("name")} (${f.get("phone")}). Service: ${f.get("service") || "-"}. ${f.get("message") || ""}`;
-            window.open("https://wa.me/919050656162?text=" + encodeURIComponent(msg), "_blank");
+            window.open(getWhatsAppUrl(msg), "_blank");
             setSent(true);
           }} className="glass space-y-4 rounded-3xl p-5 sm:p-8">
             {sent ? (
@@ -490,10 +668,63 @@ export function Contact() {
                   <input name="name" required aria-label="Name" placeholder="Your name" className={field} />
                   <input name="phone" required type="tel" aria-label="Phone" placeholder="Phone" className={field} />
                 </div>
-                <select name="service" aria-label="Service" className={field} defaultValue="">
-                  <option value="" disabled>Select a service</option>
-                  {Object.values(SERVICES).map((s) => <option key={s.t}>{s.t}</option>)}
-                </select>
+                <div ref={dropdownRef} className="relative">
+                  <input type="hidden" name="service" value={service} />
+                  <button
+                    type="button"
+                    onClick={() => setDropdownOpen((prev) => !prev)}
+                    className={`${field} flex items-center justify-between cursor-pointer transition-colors ${
+                      dropdownOpen ? "border-gold ring-1 ring-gold/40" : "hover:border-gold/50"
+                    }`}
+                    aria-haspopup="listbox"
+                    aria-expanded={dropdownOpen}
+                  >
+                    <span className={service ? "text-foreground font-medium" : "text-muted-foreground"}>
+                      {service || "Select a service"}
+                    </span>
+                    <ChevronDown
+                      className={`h-4 w-4 text-gold transition-transform duration-300 ${
+                        dropdownOpen ? "rotate-180" : ""
+                      }`}
+                    />
+                  </button>
+
+                  <AnimatePresence>
+                    {dropdownOpen && (
+                      <motion.ul
+                        initial={{ opacity: 0, y: -6, scale: 0.98 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: -6, scale: 0.98 }}
+                        transition={{ duration: 0.18, ease: EASE }}
+                        className="absolute left-0 right-0 top-full z-50 mt-2 max-h-60 overflow-y-auto rounded-2xl border border-gold/30 bg-[#141414]/95 p-1.5 shadow-2xl backdrop-blur-2xl"
+                        role="listbox"
+                      >
+                        {Object.values(SERVICES).map((s) => {
+                          const isSelected = service === s.t;
+                          return (
+                            <li
+                              key={s.t}
+                              onClick={() => {
+                                setService(s.t);
+                                setDropdownOpen(false);
+                              }}
+                              role="option"
+                              aria-selected={isSelected}
+                              className={`flex items-center justify-between rounded-xl px-4 py-3 text-sm cursor-pointer transition-colors ${
+                                isSelected
+                                  ? "bg-gold/20 text-gold font-semibold"
+                                  : "text-foreground hover:bg-gold/10 hover:text-gold"
+                              }`}
+                            >
+                              <span>{s.t}</span>
+                              {isSelected && <Check className="h-4 w-4 text-gold" />}
+                            </li>
+                          );
+                        })}
+                      </motion.ul>
+                    )}
+                  </AnimatePresence>
+                </div>
                 <textarea name="message" aria-label="Message" placeholder="Tell us about your space" rows={4} className={`${field} py-3`} />
                 <button type="submit" className="min-h-12 w-full rounded-xl bg-gold text-xs font-bold tracked text-primary-foreground transition-opacity hover:opacity-90">Send on WhatsApp</button>
               </>
@@ -524,7 +755,8 @@ export function Footer() {
         <div>
           <h4 className="tracked font-sans text-xs font-bold text-gold">Visit Us</h4>
           <p className="mt-4 text-sm text-muted-foreground">{ADDRESS}</p>
-          <a href={TEL} className="mt-3 inline-block py-1.5 text-sm text-foreground hover:text-gold">{PHONE}</a>
+          <a href={TEL} className="mt-3 block py-1 text-sm text-foreground hover:text-gold">{PHONE}</a>
+          <a href={MAILTO} className="block py-1 text-sm text-muted-foreground hover:text-gold">{EMAIL}</a>
         </div>
       </div>
       <div className="mx-auto mt-12 flex max-w-7xl flex-col gap-2 border-t border-border px-5 py-6 text-xs text-muted-foreground sm:flex-row sm:justify-between sm:px-8 lg:px-12">
@@ -556,9 +788,9 @@ export function PageShell({ children }: { children: React.ReactNode }) {
       {children}
       <Footer />
       <div className="fixed bottom-4 right-4 z-40 flex flex-col gap-3 sm:bottom-6 sm:right-6">
-        <a href={TEL} aria-label="Call Cargo Interiors" className="grid h-14 w-14 place-items-center rounded-full bg-gold text-primary-foreground shadow-lg transition-transform hover:scale-105"><Phone className="h-6 w-6" /></a>
-        <a href={WA} target="_blank" rel="noreferrer" aria-label="Chat on WhatsApp" className="grid h-14 w-14 place-items-center rounded-full bg-whatsapp text-foreground shadow-lg transition-transform hover:scale-105">
-          <svg viewBox="0 0 24 24" className="h-7 w-7" fill="currentColor" aria-hidden><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1s-.5-.1-.7.1-.8 1-1 1.2-.4.2-.7.1a8 8 0 0 1-4-3.5c-.3-.5.3-.5.9-1.6.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6a1.2 1.2 0 0 0-.9.4 3.7 3.7 0 0 0-1.1 2.8 6.5 6.5 0 0 0 1.3 3.4 14.6 14.6 0 0 0 5.6 5c2.1.9 2.9 1 4 .8a3.4 3.4 0 0 0 2.2-1.6 2.8 2.8 0 0 0 .2-1.6c-.1-.1-.3-.2-.6-.3zM12 21.8a9.8 9.8 0 0 1-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4A9.8 9.8 0 1 1 12 21.8zm8.4-18.2A11.8 11.8 0 0 0 1.8 17.8L.1 24l6.3-1.7a11.8 11.8 0 0 0 5.6 1.4A11.8 11.8 0 0 0 20.4 3.6z" /></svg>
+        <a href={TEL} aria-label="Call Cargo Interiors" className="grid h-12 w-12 place-items-center rounded-full bg-gold text-primary-foreground shadow-lg transition-transform hover:scale-105"><Phone className="h-6 w-6" /></a>
+        <a href={WA} target="_blank" rel="noreferrer" aria-label="Chat on WhatsApp" className="grid h-12 w-12 place-items-center rounded-full bg-whatsapp text-foreground shadow-lg transition-transform hover:scale-105">
+          <svg viewBox="0 0 24 24" className="h-6 w-6" fill="currentColor" aria-hidden><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1s-.5-.1-.7.1-.8 1-1 1.2-.4.2-.7.1a8 8 0 0 1-4-3.5c-.3-.5.3-.5.9-1.6.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6a1.2 1.2 0 0 0-.9.4 3.7 3.7 0 0 0-1.1 2.8 6.5 6.5 0 0 0 1.3 3.4 14.6 14.6 0 0 0 5.6 5c2.1.9 2.9 1 4 .8a3.4 3.4 0 0 0 2.2-1.6 2.8 2.8 0 0 0 .2-1.6c-.1-.1-.3-.2-.6-.3zM12 21.8a9.8 9.8 0 0 1-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4A9.8 9.8 0 1 1 12 21.8zm8.4-18.2A11.8 11.8 0 0 0 1.8 17.8L.1 24l6.3-1.7a11.8 11.8 0 0 0 5.6 1.4A11.8 11.8 0 0 0 20.4 3.6z" /></svg>
         </a>
       </div>
     </main>
