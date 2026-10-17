@@ -41,11 +41,11 @@ export const Route = createFileRoute("/")({
   component: () => (
     <PageShell>
       <Hero />
-      <ClientsMarquee />
+      <TextMarquee />
       <Stats />
       <About />
-      <TextMarquee />
       <ServicesShowcase />
+      <ClientsMarquee />
       <WhyUs />
       <Tech3D />
       <FeaturedProjects />

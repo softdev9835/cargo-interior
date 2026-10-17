@@ -10,7 +10,7 @@ export { CONTACT_INFO, PHONE, TEL, EMAIL, MAILTO, ADDRESS, WA, getWhatsAppUrl } 
 import { CONTACT_INFO, PHONE, TEL, EMAIL, MAILTO, ADDRESS, WA, getWhatsAppUrl } from "@/config/contact";
 
 export const IMG = {
-  hero: C + "hero-showroom-fDygwboA.jpg",
+  hero: C + "office-interior-CYVNJQ3h.jpg",
   building: C + "carousel-1-DyvrDold.png",
   showroom: C + "showroom-interior-BxKYR3o6.jpg",
   office: C + "office-interior-CYVNJQ3h.jpg",
@@ -26,10 +26,10 @@ const CLIENTS = [["Havas Media Network", "havas-B8V_d7lq.png"], ["Cyber City", "
 
 const NAV = [
   ["Home", "/"],
-  ["Interior Designer", "/interior-designer"],
-  ["Office Designer", "/office-designer"],
-  ["Showroom Designer", "/showroom-designer"],
-  ["Home Designer", "/home-designer"],
+  ["Commercial", "/interior-designer"],
+  ["Workspaces", "/office-designer"],
+  ["Retail & Showrooms", "/showroom-designer"],
+  ["Residences", "/home-designer"],
   ["Portfolio", "/portfolio"],
   // ["About", "/about"],
   // ["Blog", "/blog"],
@@ -86,10 +86,10 @@ export function Navbar() {
         </ul>
         <Link
           to="/contact"
-          className={`hidden min-h-11 shrink-0 whitespace-nowrap items-center rounded-2xl border px-4 text-[11px] font-bold uppercase tracking-[0.14em] transition-colors xl:inline-flex 2xl:px-5 ${
+          className={`hidden min-h-11 shrink-0 whitespace-nowrap items-center rounded-full border px-4 text-[11px] font-bold uppercase tracking-[0.14em] transition-all xl:inline-flex 2xl:px-5 ${
             currentPath === "/contact"
-              ? "border-gold bg-gold text-primary-foreground"
-              : "border-gold/70 text-gold hover:bg-gold hover:text-primary-foreground"
+              ? "border-camel bg-camel text-espresso shadow-[0_0_20px_rgba(178,150,125,0.35)]"
+              : "border-camel/60 bg-cocoa/70 text-linen hover:bg-camel hover:text-espresso hover:border-camel"
           }`}
         >
           Book a Consultation
@@ -145,7 +145,7 @@ export function Navbar() {
 
 const FACTS = ["Well-designed showrooms can increase sales by up to 30%.", "Good office design boosts productivity by up to 20%.", "Lighting alone can change how long customers stay in a store."];
 
-function DidYouKnow() {
+function DidYouKnowContent() {
   const [i, setI] = useState(0);
   const [n, setN] = useState(0);
   const text = FACTS[i]!;
@@ -158,42 +158,98 @@ function DidYouKnow() {
     return () => clearTimeout(t);
   }, [n, i, text.length]);
   return (
-    <div className="glass absolute bottom-24 right-4 hidden w-64 rounded-2xl p-5 md:block lg:right-8">
-      <div className="flex items-center gap-2 text-[10px] font-bold tracked text-gold"><Lightbulb className="h-4 w-4" />Did you know?</div>
-      <p className="mt-3 min-h-[60px] text-sm font-semibold text-foreground">{text.slice(0, n)}<span className="animate-pulse text-gold">|</span></p>
+    <div>
+      <div className="flex items-center gap-2 text-[10px] font-bold tracked text-camel"><Lightbulb className="h-4 w-4 text-camel shrink-0" />Spatial Insight</div>
+      <p className="mt-2 text-xs font-medium text-linen leading-relaxed">{text.slice(0, n)}<span className="animate-pulse text-camel">|</span></p>
     </div>
   );
 }
 
 export function Hero() {
   return (
-    <section className="relative flex min-h-[100svh] items-center justify-center overflow-hidden">
-      <motion.div className="absolute inset-0" initial={{ scale: 1.12 }} animate={{ scale: 1 }} transition={{ duration: 2.2, ease: EASE }}>
-        <img src={IMG.hero} alt="Premium showroom interior by Top Design" className="h-full w-full object-cover" fetchPriority="high" />
+    <section className="relative flex min-h-[100svh] flex-col justify-between overflow-hidden pt-32 pb-10 sm:pt-36 sm:pb-12">
+      {/* Full-Screen Background Image with Cinematic Luxury Overlay */}
+      <motion.div
+        className="absolute inset-0"
+        initial={{ scale: 1.12 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 2.4, ease: EASE }}
+      >
+        <img
+          src={IMG.hero}
+          alt="Premium showroom interior by Top Design"
+          className="h-full w-full object-cover"
+          fetchPriority="high"
+        />
       </motion.div>
-      <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/55 to-background" />
-      <div className="relative mx-auto w-full max-w-6xl px-5 pb-28 pt-28 text-center sm:px-8">
-        <motion.p initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: EASE, delay: 0.2 }} className="tracked text-[10px] text-gold sm:text-sm">Best Interior Designer in Delhi</motion.p>
-        <h1 className="mt-5 font-serif font-bold leading-[1.05] text-[2.5rem] sm:text-6xl lg:text-7xl xl:text-[5.5rem]">
-          {["We Design Spaces That", "Sell, Scale & Impress"].map((l, k) => (
-            <span key={l} className="block overflow-hidden pb-2">
-              <motion.span className={`block ${k ? "text-gold" : "text-foreground"}`} initial={{ y: "110%" }} animate={{ y: 0 }} transition={{ duration: 1, ease: EASE, delay: 0.35 + k * 0.15 }}>{l}</motion.span>
-            </span>
-          ))}
-        </h1>
-        <Reveal delay={0.7}>
-          <p className="mx-auto mt-6 max-w-2xl text-base text-foreground/90 sm:text-xl">Showrooms that convert. Offices that inspire. Your trusted interior designer in Delhi for spaces engineered for business impact.</p>
-          <div className="mt-10 flex flex-col items-stretch justify-center gap-4 sm:flex-row sm:items-center">
-            <a href={WA} target="_blank" rel="noreferrer" className="inline-flex min-h-14 items-center justify-center rounded-xl bg-gold px-10 text-xs font-bold tracked text-primary-foreground transition-all duration-500 ease-lux hover:-translate-y-0.5 hover:shadow-[0_10px_30px_-10px_var(--gold)] sm:text-sm">Book a Consultation</a>
-            <a href={TEL} className="inline-flex min-h-14 items-center justify-center rounded-xl border border-gold px-10 text-xs font-bold tracked text-gold transition-colors hover:bg-gold hover:text-primary-foreground sm:text-sm">Call Now</a>
+      <div className="absolute inset-0 bg-gradient-to-b from-background/75 via-background/60 to-background" />
+
+      {/* Ambient glowing radial orbs */}
+      <span className="orb-emerald -left-20 top-1/4 h-[32rem] w-[32rem] opacity-45 pointer-events-none" />
+      <span className="orb-burgundy -right-20 top-1/3 h-[28rem] w-[28rem] opacity-35 pointer-events-none" />
+
+      {/* Main Content: Asymmetric Editorial Split Layout */}
+      <div className="relative mx-auto my-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12">
+        <div className="grid items-end gap-10 lg:grid-cols-12 lg:gap-12">
+          
+          {/* Left Column (8 cols): Bold Asymmetric Headline & Pitch */}
+          <div className="lg:col-span-10">
+
+            <h1 className="mt-6 font-serif font-bold leading-[1.04] text-4xl sm:text-6xl lg:text-7xl xl:text-[5.25rem] text-linen">
+              We Design Spaces That{" "}
+              <span className="block text-camel">Sell, Scale & Impress</span>
+            </h1>
+
+            <p className="mt-6 max-w-2xl text-base font-light leading-relaxed text-linen/90 sm:text-xl">
+              Showrooms engineered to convert walk-ins. Offices designed to inspire high-performance teams. 
+              Turnkey interior execution across Delhi NCR backed by 10+ years of precision craft.
+            </p>
+
+            {/* CTA Buttons */}
+            <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
+              <a
+                href={WA}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex min-h-14 items-center justify-center rounded-xl bg-camel px-9 text-xs font-bold tracked text-espresso shadow-[0_8px_30px_rgba(178,150,125,0.35)] transition-all duration-500 ease-lux hover:-translate-y-0.5 hover:shadow-[0_12px_36px_rgba(178,150,125,0.55)] sm:text-sm"
+              >
+                Book a Free Consultation
+              </a>
+              <a
+                href={TEL}
+                className="inline-flex min-h-14 items-center justify-center rounded-xl border border-camel/60 bg-espresso/90 px-8 text-xs font-bold tracked text-linen shadow-[0_6px_24px_rgba(74,52,42,0.5)] transition-all duration-500 ease-lux hover:-translate-y-0.5 hover:bg-camel hover:text-espresso sm:text-sm"
+              >
+                Call Now Direct
+              </a>
+            </div>
           </div>
-        </Reveal>
+
+        </div>
       </div>
-      <div className="absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center gap-3">
-        <span className="h-14 w-px bg-gold/60 animate-scrollline" />
-        <span className="tracked text-[10px] text-muted-foreground">Scroll</span>
+
+      {/* Bottom Row: Horizontal Proof Bar & Scroll Cue */}
+      <div className="relative mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12">
+        <div className="flex flex-wrap items-center justify-between gap-4 border-t border-border/60 pt-6">
+          <div className="flex flex-wrap items-center gap-6 text-xs text-khaki">
+            <div className="flex items-center gap-2">
+              <span className="font-serif text-lg font-bold text-camel">100+</span> Projects Delivered
+            </div>
+            <span className="h-3 w-px bg-border hidden sm:block" />
+            <div className="flex items-center gap-2">
+              <span className="font-serif text-lg font-bold text-camel">4.9 ★</span> Google Rating
+            </div>
+            <span className="h-3 w-px bg-border hidden sm:block" />
+            <div className="flex items-center gap-2">
+              <span className="font-serif text-lg font-bold text-camel">80+</span> In-House Specialists
+            </div>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <span className="h-8 w-px bg-camel/60 animate-scrollline" />
+            <span className="tracked text-[10px] text-khaki">Scroll</span>
+          </div>
+        </div>
       </div>
-      <DidYouKnow />
     </section>
   );
 }
@@ -221,10 +277,10 @@ export function TextMarquee() {
   const words = ["Showroom Interiors", "Office Interiors", "Restaurant & Café", "Home Interiors", "3D Visualization", "Turnkey Execution"];
   const list = [...words, ...words];
   return (
-    <div className="overflow-hidden border-y border-gold/20 bg-surface/50 py-5">
+    <div className="overflow-hidden border-y border-camel/30 bg-cocoa py-5 shadow-inner">
       <div className="flex w-max animate-marquee items-center gap-10">
         {list.map((w, k) => (
-          <span key={k} className="flex items-center gap-10 font-serif text-2xl font-bold text-foreground/80 sm:text-4xl">{w}<span className="text-gold">✦</span></span>
+          <span key={k} className="flex items-center gap-10 font-serif text-2xl font-bold text-linen sm:text-4xl">{w}<span className="text-camel">✦</span></span>
         ))}
       </div>
     </div>
@@ -251,43 +307,167 @@ function Counter({ to, suffix }: { to: number; suffix: string }) {
 }
 
 export function Stats() {
-  const s: [number, string][] = [[10, "Years of Excellence"], [100, "Projects Delivered"], [80, "Professionals"], [15, "Cities Served"]];
+  const metrics = [
+    { n: 10, suffix: "+", title: "Years of Mastery", desc: "Leading Delhi NCR's architectural revolution since 2015." },
+    { n: 100, suffix: "+", title: "Flagship Projects", desc: "Showrooms, corporate HQs, fine dining & luxury residences." },
+    { n: 80, suffix: "+", title: "In-House Specialists", desc: "Spatial planners, architects, and site engineers on direct payroll." },
+    { n: 15, suffix: "+", title: "Cities Pan-India", desc: "Turnkey delivery across Delhi NCR and major business hubs nationwide." },
+  ];
+
   return (
-    <section className="py-14 sm:py-20">
-      <div className="mx-auto grid max-w-7xl grid-cols-2 gap-y-10 px-5 sm:px-8 lg:grid-cols-4 lg:px-12">
-        {s.map(([n, l]) => (
-          <div key={l} className="text-center">
-            <div className="font-serif text-4xl font-bold text-gold sm:text-5xl lg:text-6xl"><Counter to={n} suffix="+" /></div>
-            <div className="tracked mt-3 text-[10px] text-muted-foreground sm:text-xs">{l}</div>
-          </div>
-        ))}
+    <section className="border-y border-border/60 bg-surface/40 py-16 sm:py-20">
+      <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
+        <div className="mb-10 text-center">
+          <p className="tracked text-[10px] font-bold text-camel sm:text-xs">PROVEN BUSINESS IMPACT</p>
+          <h2 className="mt-2 font-serif text-2xl font-bold text-linen sm:text-4xl">Numbers That Validate Our Precision</h2>
+        </div>
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {metrics.map((m) => (
+            <div
+              key={m.title}
+              className="glass group relative overflow-hidden rounded-3xl border border-border/80 p-6 transition-all duration-500 ease-lux hover:-translate-y-1 hover:border-camel/50 sm:p-7"
+            >
+              <div className="font-serif text-4xl font-bold text-camel sm:text-5xl">
+                <Counter to={m.n} suffix={m.suffix} />
+              </div>
+              <h3 className="mt-3 text-base font-bold text-linen">{m.title}</h3>
+              <p className="mt-2 text-xs leading-relaxed text-khaki font-light">{m.desc}</p>
+              <span className="absolute bottom-0 right-0 h-16 w-16 translate-x-4 translate-y-4 rounded-full bg-camel/5 blur-xl group-hover:bg-camel/15 transition-all" />
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
 }
 
 export function About() {
+  const pillars = [
+    {
+      num: "01",
+      tag: "Spatial Psychology",
+      t: "Strategic Spatial Planning",
+      d: "Layouts engineered using customer dwell-time analytics and flow psychology to turn passive visitors into active buyers.",
+      chips: ["Customer Flow", "Dwell Time Optimization", "Zoning Rigor"],
+    },
+    {
+      num: "02",
+      tag: "Turnkey Rigor",
+      t: "100% In-House Execution",
+      d: "Direct payroll civil, MEP, bespoke millwork, and glass installation — eliminating third-party handoffs and execution friction.",
+      chips: ["In-House MEP", "Direct Carpentry", "Zero Excuses"],
+    },
+    {
+      num: "03",
+      tag: "Financial Certainty",
+      t: "Predictable Cost & Time",
+      d: "Itemized transparency down to the millimeter with fixed BOQs, milestone audits, and zero budget overruns on handover day.",
+      chips: ["Fixed BOQ", "Milestone Audits", "0% Cost Overrun"],
+    },
+  ];
+
   return (
-    <Section watermark="TOP DESIGN">
-      <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
-        <Reveal>
-          <Eyebrow>The Brand</Eyebrow>
-          <MixedHeading plain="We Don't Decorate." accent="We Engineer Experiences." />
-          <p className="mt-6 text-base font-light leading-relaxed text-muted-foreground sm:text-lg">Founded in 2015 in Delhi NCR, Top Design is not your typical design firm. As a leading interior designer in Delhi NCR, we are strategic space planners who understand that every square foot is an asset — and every design decision impacts your bottom line.</p>
-          <p className="mt-4 text-base font-light leading-relaxed text-muted-foreground">From branded showrooms that turn walk-ins into buyers, to offices that attract top talent — we design with purpose, precision, and an obsession for premium execution. Led by Azam Saifi, our 80+ member team has delivered over 100 high-value projects across 15+ cities.</p>
-          <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
-            <GoldButton href="/about">Learn More About Us</GoldButton>
-            <a href={WA} target="_blank" rel="noreferrer" className="inline-flex min-h-11 items-center gap-2 text-xs font-bold tracked text-gold hover:text-foreground">Let's Talk <ArrowRight className="h-4 w-4" /></a>
+    <Section watermark="STUDIO" className="relative overflow-hidden py-24 sm:py-32">
+      {/* Top Editorial Manifesto Bar */}
+      <Reveal className="mb-14 grid items-end gap-8 lg:grid-cols-12 lg:gap-12">
+        <div className="lg:col-span-7">
+          <div className="inline-flex items-center gap-2 rounded-full border border-camel/40 bg-cocoa/40 px-3.5 py-1 text-[11px] font-bold uppercase tracking-widest text-camel mb-4">
+            <span className="h-1.5 w-1.5 rounded-full bg-camel animate-pulse" /> Studio Philosophy
+          </div>
+          <h2 className="font-serif text-3xl font-bold leading-tight text-linen sm:text-5xl lg:text-6xl">
+            We Don't Just Decorate. <br />
+            <span className="text-camel italic font-normal">We Engineer Immersive Spaces.</span>
+          </h2>
+        </div>
+        <div className="lg:col-span-5">
+          <p className="text-base font-light leading-relaxed text-khaki sm:text-lg">
+            Founded in 2015 in Delhi NCR, Top Design bridges architectural discipline with consumer psychology. Every square foot is treated as an active business asset — designed to maximize revenue, enhance productivity, and radiate brand prestige.
+          </p>
+        </div>
+      </Reveal>
+
+      {/* Main Showcase Grid: Left Architectural Frame + Right Bespoke Pillar Rows */}
+      <div className="grid items-stretch gap-8 lg:grid-cols-12 lg:gap-10">
+        {/* Left Column (5 cols): Architectural Frame with Studio Plaque */}
+        <Reveal delay={0.1} className="relative flex flex-col lg:col-span-5">
+          <div className="group relative h-full min-h-[460px] overflow-hidden rounded-[2.5rem] border border-camel/30 bg-surface shadow-2xl">
+            <Img
+              src={IMG.building}
+              alt="Top Design commercial architecture headquarters"
+              className="h-full w-full object-cover transition-transform duration-700 ease-lux group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/25 to-transparent" />
+
+            {/* Corner Badge */}
+            <div className="absolute top-5 left-5 rounded-full border border-camel/40 bg-surface/85 px-4 py-1.5 text-[10px] font-bold uppercase tracking-widest text-linen backdrop-blur-md shadow-lg">
+              HQ · Delhi NCR
+            </div>
+
+            {/* Bottom Floating Studio Plaque */}
+            <div className="absolute inset-x-5 bottom-5 rounded-3xl border border-camel/30 bg-surface/90 p-6 shadow-2xl backdrop-blur-md">
+              <div className="flex items-center justify-between">
+                <span className="text-[10px] font-bold uppercase tracking-widest text-camel">Architecture & Execution</span>
+                <span className="text-[10px] font-semibold text-khaki">Est. 2015</span>
+              </div>
+              <p className="mt-3 font-serif text-lg font-bold text-linen leading-snug">
+                "Precision is our signature. Perfection is our standard."
+              </p>
+              <p className="mt-2 text-xs text-khaki font-light">
+                Led by Azam Saifi & a core team of 80+ in-house design & engineering specialists.
+              </p>
+            </div>
           </div>
         </Reveal>
-        <Reveal delay={0.15} className="relative mx-auto w-full max-w-lg">
-          <div aria-hidden className="absolute -inset-3 translate-x-3 translate-y-3 rounded-[28px] border border-gold/25" />
-          <div className="relative aspect-[4/5] overflow-hidden rounded-3xl border-8 border-surface"><Img src={IMG.building} alt="Premium commercial building exterior design in Gurgaon" /></div>
-          <div className="glass absolute -bottom-6 left-4 rounded-2xl px-5 py-4 sm:-left-6">
-            <div className="font-serif text-xl font-bold text-gold">Since 2015</div>
-            <div className="tracked mt-1 text-[10px] text-muted-foreground">Laxmi Nagar, Delhi</div>
+
+        {/* Right Column (7 cols): Expanded Architecture Pillars */}
+        <div className="flex flex-col justify-between gap-4 lg:col-span-7">
+          <div className="space-y-4">
+            {pillars.map((p, k) => (
+              <Reveal key={p.t} delay={0.15 * (k + 1)}>
+                <div className="group relative overflow-hidden rounded-3xl border border-border/80 bg-surface/50 p-6 sm:p-7 transition-all duration-300 hover:border-camel/60 hover:bg-surface/80 hover:shadow-[0_12px_32px_rgba(74,52,42,0.35)]">
+                  <div className="flex items-start gap-5">
+                    <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-camel/30 bg-cocoa/40 font-serif text-base font-bold text-camel transition-colors duration-300 group-hover:bg-camel group-hover:text-espresso">
+                      {p.num}
+                    </span>
+                    <div className="flex-1">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-camel">{p.tag}</span>
+                      <h3 className="mt-1 font-serif text-lg font-bold text-linen sm:text-xl">{p.t}</h3>
+                      <p className="mt-2 text-xs sm:text-sm font-light leading-relaxed text-khaki">{p.d}</p>
+                      <div className="mt-4 flex flex-wrap gap-2">
+                        {p.chips.map((chip) => (
+                          <span
+                            key={chip}
+                            className="rounded-full border border-camel/25 bg-cocoa/30 px-3 py-1 text-[10px] font-medium text-linen/90"
+                          >
+                            {chip}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
           </div>
-        </Reveal>
+
+          {/* Action Button Row */}
+          <Reveal delay={0.5} className="mt-4 flex flex-col gap-4 sm:flex-row sm:items-center">
+            <Link
+              to="/about"
+              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-camel bg-camel px-7 text-xs font-bold uppercase tracking-wider text-espresso transition-all hover:bg-transparent hover:text-camel shadow-[0_0_20px_rgba(178,150,125,0.35)]"
+            >
+              Discover Our Story <ArrowRight className="h-4 w-4" />
+            </Link>
+            <a
+              href={WA}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-camel/40 bg-cocoa/40 px-7 text-xs font-bold uppercase tracking-wider text-linen transition-colors hover:border-camel hover:text-camel"
+            >
+              Schedule Studio Consultation <ArrowRight className="h-4 w-4" />
+            </a>
+          </Reveal>
+        </div>
       </div>
     </Section>
   );
@@ -324,7 +504,8 @@ export function ServiceFeature({ k, flip = false }: { k: ServiceKey; flip?: bool
 export function ServicesShowcase() {
   return (
     <Section className="bg-surface/40">
-      <span className="orb left-1/3 top-20 h-80 w-80" />
+      <span className="orb-emerald left-1/4 top-16 h-96 w-96 opacity-60" />
+      <span className="orb right-10 bottom-10 h-72 w-72 opacity-50" />
       <SectionHeader eyebrow="What We Build" plain="Spaces That" accent="Drive Revenue" />
       <div className="space-y-16 sm:space-y-24">
         <ServiceFeature k="showroom" />
@@ -350,23 +531,36 @@ export function ServicesShowcase() {
 
 export function WhyUs() {
   const items = [
-    [Layers, "Design + Execution", "We don't hand off drawings. We design, build, and deliver — end to end. One team. Zero gaps."],
-    [Compass, "Rapid Delivery", "Time is money. Our streamlined process and 80+ person team ensures your space is ready when you need it."],
-    [Gem, "Premium Materials", "We source materials that look exceptional and last. No shortcuts. No compromises on quality."],
-    [Lightbulb, "Strategic Design", "Every layout decision is backed by spatial psychology, brand strategy, and business objectives."],
-    [Award, "Proven Track Record", "100+ projects. 15+ cities. A decade of trust from business owners who don't settle for average."],
-    [FileText, "Transparent Process", "Detailed proposals, clear timelines, and honest communication. You always know where your project stands."],
+    [Layers, "Design + Turnkey Execution", "We don't hand off drawings. We design, build, and deliver — end to end. One accountable team, zero third-party finger-pointing."],
+    [Compass, "Rapid Timeline Delivery", "Time is revenue. Our streamlined in-house process and 80+ person crew ensures your commercial space opens on schedule."],
+    [Gem, "Curated Material Sourcing", "We source commercial-grade materials that withstand high traffic and exude timeless sophistication. Zero compromises on durability."],
+    [Lightbulb, "Strategic Spatial Psychology", "Every layout decision is calibrated for customer dwell time, brand perception, and measurable sales conversion."],
+    [Award, "A Decade of Proven Trust", "Over 100 high-value projects delivered across 15+ cities since 2015 for visionary entrepreneurs."],
+    [FileText, "Transparent Fixed-Cost Proposals", "Exhaustive BOQs, milestone-driven billing, and clear daily site updates. You are always in control of your budget."],
   ] as const;
+
   return (
     <Section watermark="WHY US">
-      <span className="orb right-10 top-1/3 h-80 w-80" />
-      <SectionHeader eyebrow="The Difference" plain="Why The Best" accent="Choose Us" />
-      <div className="grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
+      <span className="orb-burgundy right-10 top-1/3 h-96 w-96 opacity-60" />
+      <span className="orb left-10 bottom-10 h-80 w-80 opacity-40" />
+      <SectionHeader eyebrow="The Difference" plain="Why Industry Leaders" accent="Choose Us" />
+      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {items.map(([I, t, d], k) => (
-          <Reveal key={t} delay={(k % 3) * 0.08} className="glass group rounded-3xl p-6 transition-all duration-700 ease-lux hover:-translate-y-1.5 hover:border-gold/50 sm:p-8">
-            <I className="h-8 w-8 text-gold" strokeWidth={1} />
-            <h3 className="mt-6 text-xl">{t}</h3>
-            <p className="mt-2 text-sm font-light leading-relaxed text-muted-foreground">{d}</p>
+          <Reveal
+            key={t}
+            delay={(k % 3) * 0.08}
+            className={`glass group rounded-3xl p-6 transition-all duration-700 ease-lux hover:-translate-y-1.5 hover:border-camel/50 sm:p-8 ${
+              k === 0 ? "sm:col-span-2 lg:col-span-2 border-camel/30 bg-gradient-to-br from-cocoa/30 via-surface/80 to-surface/40" : ""
+            }`}
+          >
+            <div className="flex items-start justify-between">
+              <div className={`mb-6 grid h-12 w-12 place-items-center rounded-2xl border ${k % 2 === 0 ? "border-camel/60 bg-camel/20 text-camel" : "border-cocoa/70 bg-cocoa/30 text-camel"}`}>
+                <I className="h-6 w-6" strokeWidth={1.5} />
+              </div>
+              <span className="font-serif text-xs font-bold text-khaki/60">0{k + 1}</span>
+            </div>
+            <h3 className={`text-xl font-bold text-linen ${k === 0 ? "sm:text-2xl" : ""}`}>{t}</h3>
+            <p className="mt-2 text-sm font-light leading-relaxed text-khaki">{d}</p>
           </Reveal>
         ))}
       </div>
@@ -381,13 +575,29 @@ export function Tech3D() {
         <Reveal>
           <Eyebrow>Our Process</Eyebrow>
           <MixedHeading plain="Where Technology Meets" accent="Interior Design" />
-          <p className="mt-6 font-light leading-relaxed text-muted-foreground sm:text-lg">Every project begins with a high-fidelity 3D visualization — so you experience your space before a single nail is driven.</p>
-          <ul className="mt-6 space-y-3">
-            {["Review & approve photo-realistic 3D renders", "No surprises — clear expectations from day one", "Execution mirrors the approved design with precision"].map((p) => <li key={p} className="flex items-start gap-3"><Check className="mt-1 h-4 w-4 shrink-0 text-gold" />{p}</li>)}
+          <p className="mt-6 font-light leading-relaxed text-khaki sm:text-lg">Every project begins with a high-fidelity 3D visualization — so you experience your space before a single nail is driven.</p>
+          <ul className="mt-6 space-y-3.5">
+            {[
+              "Review & approve photo-realistic 3D walkthroughs",
+              "Zero surprises — material samples matched to digital render",
+              "Turnkey execution mirrors approved design with millimetre precision"
+            ].map((p) => (
+              <li key={p} className="flex items-start gap-3 text-sm text-linen/90">
+                <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-camel/20 border border-camel/60 text-[10px] font-bold text-camel">✓</span>
+                {p}
+              </li>
+            ))}
           </ul>
         </Reveal>
-        <Reveal delay={0.15} className="aspect-[4/3] overflow-hidden rounded-3xl border border-border">
+        <Reveal delay={0.15} className="relative aspect-[4/3] overflow-hidden rounded-[2.5rem] border border-camel/30 shadow-2xl">
           <Img src={IMG.render} alt="3D visualization preview" />
+          <div className="glass absolute bottom-4 left-4 right-4 rounded-2xl border border-camel/30 p-3.5 shadow-xl flex items-center justify-between">
+            <div>
+              <div className="text-xs font-bold text-camel">Photo-Realistic 3D Renders</div>
+              <div className="text-[10px] text-khaki">Approved Before Execution Begins</div>
+            </div>
+            <span className="h-2 w-2 rounded-full bg-camel animate-ping" />
+          </div>
         </Reveal>
       </div>
     </Section>
@@ -403,16 +613,31 @@ export const PROJECTS = [
   { c: "Home", t: "Luxury Residence", r: "Bespoke living, white-glove execution", s: IMG.home },
 ];
 
-export function ProjectCard({ p }: { p: (typeof PROJECTS)[number] }) {
+export function ProjectCard({ p, idx }: { p: (typeof PROJECTS)[number]; idx?: number }) {
   return (
-    <article className="group">
-      <div className="aspect-[4/3] overflow-hidden rounded-lg">
+    <article className="group relative overflow-hidden rounded-3xl border border-border/80 bg-surface/30 p-3 sm:p-4 transition-all duration-500 ease-lux hover:-translate-y-1.5 hover:border-camel/50 hover:shadow-[0_16px_40px_-12px_rgba(0,0,0,0.8)]">
+      <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
         <Img src={p.s} alt={`${p.t} - interior design project in Delhi`} className="transition-transform duration-700 ease-lux group-hover:scale-105" />
+        <div className="absolute inset-0 bg-gradient-to-t from-espresso/80 via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity" />
+        <span className="absolute top-3 left-3 rounded-full border border-camel/30 bg-espresso/85 backdrop-blur-md px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-camel">
+          {p.c}
+        </span>
+        {idx !== undefined && (
+          <span className="absolute top-3 right-3 font-serif text-xs font-bold text-linen/70">
+            0{idx + 1}
+          </span>
+        )}
       </div>
-      <div className="tracked mt-5 text-[11px] text-gold">{p.c}</div>
-      <h3 className="mt-2 text-xl sm:text-2xl">{p.t}</h3>
-      <p className="mt-2 text-sm text-muted-foreground sm:text-base">{p.r}</p>
-      <a href={WA} target="_blank" rel="noreferrer" className="tracked mt-5 inline-flex min-h-11 items-center gap-2 border-b border-gold/60 text-[11px] text-gold transition-colors hover:text-foreground">Read More →</a>
+      <div className="p-2 sm:p-3">
+        <h3 className="mt-2 text-lg sm:text-xl font-bold text-linen group-hover:text-camel transition-colors">{p.t}</h3>
+        <p className="mt-1.5 text-xs text-khaki leading-relaxed">{p.r}</p>
+        <div className="mt-4 pt-3 border-t border-border/60 flex items-center justify-between">
+          <a href={WA} target="_blank" rel="noreferrer" className="tracked text-[11px] font-bold text-camel hover:text-linen transition-colors flex items-center gap-1.5">
+            View Case Study <ArrowRight className="h-3.5 w-3.5" />
+          </a>
+          <span className="text-[10px] text-khaki font-medium">Delhi NCR</span>
+        </div>
+      </div>
     </article>
   );
 }
@@ -429,22 +654,22 @@ export function FeaturedProjects({ all = false }: { all?: boolean }) {
           <Eyebrow>Selected Work</Eyebrow>
           <MixedHeading plain="Transformations" accent="That Speak" />
         </Reveal>
-        {!all && <Link to="/portfolio" className="group inline-flex min-h-11 items-center gap-3 text-xs font-bold tracked hover:text-gold">View All Projects <ArrowRight className="h-4 w-4 text-gold" /></Link>}
+        {!all && <Link to="/portfolio" className="group inline-flex min-h-11 items-center gap-3 text-xs font-bold tracked text-linen hover:text-camel transition-colors">View All Projects <ArrowRight className="h-4 w-4 text-camel" /></Link>}
       </div>
       {all && (
         <div className="-mx-5 mb-10 overflow-x-auto px-5 sm:mx-0 sm:px-0" role="tablist">
           <div className="flex w-max gap-2">
             {tabs.map((t) => (
-              <button key={t} role="tab" aria-selected={tab === t} onClick={() => setTab(t)} className={`min-h-11 rounded-full border px-5 text-xs font-bold tracked transition-colors ${tab === t ? "border-gold bg-gold text-primary-foreground" : "border-border text-muted-foreground hover:text-foreground"}`}>{t}</button>
+              <button key={t} role="tab" aria-selected={tab === t} onClick={() => setTab(t)} className={`min-h-11 rounded-full border px-5 text-xs font-bold tracked transition-colors ${tab === t ? "border-camel bg-camel text-espresso" : "border-border text-khaki hover:text-linen"}`}>{t}</button>
             ))}
           </div>
         </div>
       )}
-      <motion.div layout className="grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+      <motion.div layout className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         <AnimatePresence mode="popLayout">
-          {list.map((p) => (
+          {list.map((p, k) => (
             <motion.div layout key={p.t} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.6, ease: EASE }}>
-              <ProjectCard p={p} />
+              <ProjectCard p={p} idx={k} />
             </motion.div>
           ))}
         </AnimatePresence>
@@ -464,8 +689,8 @@ export function Testimonials() {
   const r = REVIEWS[i]!;
   return (
     <Section className="bg-surface/40">
-      <span className="orb left-10 top-1/4 h-80 w-80" />
-      <span className="orb bottom-0 right-10 h-72 w-72" />
+      <span className="orb-emerald left-10 top-1/4 h-80 w-80 opacity-60" />
+      <span className="orb-burgundy bottom-0 right-10 h-72 w-72 opacity-50" />
       <SectionHeader eyebrow="Client Words" plain="Trusted by" accent="Decision Makers" />
       <div className="glass relative mx-auto max-w-3xl rounded-3xl p-6 sm:p-10 lg:p-12">
         <AnimatePresence mode="wait">
@@ -600,14 +825,17 @@ export function FAQ() {
 export function CTA() {
   return (
     <section className="relative overflow-hidden py-20 sm:py-28">
-      <div className="absolute inset-0"><Img src={IMG.p2} alt="" /><div className="absolute inset-0 bg-background/85" /></div>
+      <div className="absolute inset-0">
+        <Img src={IMG.p2} alt="" />
+        <div className="absolute inset-0 bg-gradient-to-br from-espresso/95 via-charcoal/95 to-charcoal" />
+      </div>
       <Reveal className="relative mx-auto max-w-4xl px-5 text-center sm:px-8">
-        <p className="tracked text-[10px] text-gold sm:text-xs">Start Today</p>
-        <h2 className="mt-4 text-3xl leading-tight sm:text-5xl">If Your Space Doesn't Impress, <span className="block text-gold">It Doesn't Convert.</span></h2>
-        <p className="mx-auto mt-6 max-w-xl font-light text-muted-foreground sm:text-lg">Every day your space underperforms is revenue left on the table. Let's change that — with a complimentary design consultation.</p>
+        <p className="tracked text-[10px] text-camel sm:text-xs">Start Today</p>
+        <h2 className="mt-4 text-3xl leading-tight sm:text-5xl text-linen">If Your Space Doesn't Impress, <span className="block text-camel">It Doesn't Convert.</span></h2>
+        <p className="mx-auto mt-6 max-w-xl font-light text-linen/80 sm:text-lg">Every day your space underperforms is revenue left on the table. Let's change that — with a complimentary design consultation.</p>
         <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
-          <a href={WA} target="_blank" rel="noreferrer" className="inline-flex min-h-14 items-center justify-center rounded-xl bg-gold px-10 text-xs font-bold tracked text-primary-foreground">Start Your Project</a>
-          <a href={TEL} className="inline-flex min-h-14 items-center justify-center rounded-xl border border-gold px-10 text-xs font-bold tracked text-gold hover:bg-gold hover:text-primary-foreground">{PHONE}</a>
+          <a href={WA} target="_blank" rel="noreferrer" className="inline-flex min-h-14 items-center justify-center rounded-xl bg-camel px-10 text-xs font-bold tracked text-espresso shadow-[0_8px_30px_rgba(178,150,125,0.3)] hover:shadow-[0_12px_36px_rgba(178,150,125,0.5)]">Start Your Project</a>
+          <a href={TEL} className="inline-flex min-h-14 items-center justify-center rounded-xl border border-camel/70 bg-cocoa px-10 text-xs font-bold tracked text-linen shadow-[0_6px_24px_rgba(125,90,68,0.4)] hover:border-linen hover:text-camel">{PHONE}</a>
         </div>
       </Reveal>
     </section>
@@ -693,7 +921,7 @@ export function Contact() {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: -6, scale: 0.98 }}
                         transition={{ duration: 0.18, ease: EASE }}
-                        className="absolute left-0 right-0 top-full z-50 mt-2 max-h-60 overflow-y-auto rounded-2xl border border-gold/30 bg-[#141414]/95 p-1.5 shadow-2xl backdrop-blur-2xl"
+                        className="absolute left-0 right-0 top-full z-50 mt-2 max-h-60 overflow-y-auto rounded-2xl border border-gold/30 bg-surface/95 p-1.5 shadow-2xl backdrop-blur-2xl"
                         role="listbox"
                       >
                         {Object.values(SERVICES).map((s) => {
@@ -844,13 +1072,75 @@ export function Footer() {
 
 export function PageHero({ eyebrow, plain, accent, text, img }: { eyebrow: string; plain: string; accent: string; text: string; img: string }) {
   return (
-    <section className="relative overflow-hidden pb-16 pt-36 sm:pb-24 sm:pt-44 lg:pb-28 lg:pt-52">
-      <div className="absolute inset-0"><Img src={img} alt="" /><div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/75 to-background" /></div>
-      <div className="relative mx-auto max-w-4xl px-5 text-center sm:px-8">
-        <Reveal><p className="tracked text-[10px] text-gold sm:text-sm">{eyebrow}</p></Reveal>
-        <Reveal delay={0.1}><h1 className="mt-5 text-4xl leading-[1.08] sm:text-6xl lg:text-7xl">{plain} <span className="block text-gold">{accent}</span></h1></Reveal>
-        <Reveal delay={0.2}><p className="mx-auto mt-6 max-w-2xl text-base text-foreground/85 sm:text-lg">{text}</p></Reveal>
-        <Reveal delay={0.3} className="mt-6 flex items-center justify-center gap-2 text-[10px] tracked text-muted-foreground"><Link to="/" className="hover:text-gold">Home</Link><span className="text-gold">/</span><span className="text-foreground">{eyebrow}</span></Reveal>
+    <section className="relative flex min-h-[75svh] flex-col justify-between overflow-hidden pt-32 pb-10 sm:pt-36 sm:pb-12 lg:min-h-[80svh]">
+      {/* Full-bleed background image with cinematic gradient */}
+      <motion.div
+        className="absolute inset-0"
+        initial={{ scale: 1.1 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 2.2, ease: EASE }}
+      >
+        <Img src={img} alt={`${plain} ${accent}`} className="h-full w-full object-cover" />
+      </motion.div>
+      <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/65 to-background" />
+
+      {/* Ambient glowing radial orbs */}
+      <span className="orb-emerald -left-20 top-1/4 h-[30rem] w-[30rem] opacity-40 pointer-events-none" />
+      <span className="orb-burgundy -right-20 top-1/3 h-[26rem] w-[26rem] opacity-30 pointer-events-none" />
+
+      {/* Main Content: Left-Aligned Editorial Layout matching Home Page */}
+      <div className="relative mx-auto my-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12">
+        <div className="max-w-4xl">
+          {/* Breadcrumb pill */}
+          <Reveal>
+            <div className="inline-flex items-center gap-2 rounded-full border border-camel/40 bg-cocoa/40 px-4 py-1.5 shadow-[0_0_20px_rgba(125,90,68,0.3)] backdrop-blur-sm">
+              <span className="h-2 w-2 rounded-full bg-camel animate-pulse" />
+              <div className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest text-linen sm:text-xs">
+                <Link to="/" className="text-khaki hover:text-camel transition-colors">Home</Link>
+                <span className="text-camel">/</span>
+                <span className="text-linen">{eyebrow}</span>
+              </div>
+            </div>
+          </Reveal>
+
+          {/* Staggered Serif Headline */}
+          <Reveal delay={0.1}>
+            <h1 className="mt-6 font-serif font-bold leading-[1.04] text-4xl sm:text-6xl lg:text-7xl xl:text-[5rem] text-linen">
+              {plain} <span className="block text-camel">{accent}</span>
+            </h1>
+          </Reveal>
+
+          {/* Left-Aligned Narrative Text */}
+          <Reveal delay={0.2}>
+            <p className="mt-6 max-w-2xl text-base font-light leading-relaxed text-linen/90 sm:text-xl">
+              {text}
+            </p>
+          </Reveal>
+        </div>
+      </div>
+
+      {/* Bottom Horizontal Trust Bar & Scroll Cue */}
+      <div className="relative mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12">
+        <div className="flex flex-wrap items-center justify-between gap-4 border-t border-border/60 pt-6">
+          <div className="flex flex-wrap items-center gap-6 text-xs text-khaki">
+            <div className="flex items-center gap-2">
+              <span className="font-serif text-lg font-bold text-camel">100+</span> Projects Delivered
+            </div>
+            <span className="h-3 w-px bg-border hidden sm:block" />
+            <div className="flex items-center gap-2">
+              <span className="font-serif text-lg font-bold text-camel">4.9 ★</span> Google Rating
+            </div>
+            <span className="h-3 w-px bg-border hidden sm:block" />
+            <div className="flex items-center gap-2">
+              <span className="font-serif text-lg font-bold text-camel">Since 2015</span> Delhi NCR Studio
+            </div>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <span className="h-8 w-px bg-camel/60 animate-scrollline" />
+            <span className="tracked text-[10px] text-khaki">Scroll</span>
+          </div>
+        </div>
       </div>
     </section>
   );

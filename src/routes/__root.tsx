@@ -8,8 +8,8 @@ import {
   Scripts,
   type ErrorComponentProps,
 } from "@tanstack/react-router";
-import { type ReactNode } from "react";
-
+import type { ReactNode } from "react";
+import "../styles.css";
 import appCss from "../styles.css?url";
 
 function NotFoundComponent() {

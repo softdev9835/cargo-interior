@@ -4,9 +4,9 @@ import { PageShell, PageHero, IMG, ServiceFeature, TextMarquee, Tech3D, Featured
 export const Route = createFileRoute("/home-designer")({
   head: () => ({
     meta: [
-      { title: "Home Interior Designer | Top Design" },
+      { title: "Luxury Residences & Home Interiors | Top Design" },
       { name: "description", content: "Bespoke luxury home interiors — modular kitchens, bedrooms, living rooms and complete renovations." },
-      { property: "og:title", content: "Home Interior Designer | Top Design" },
+      { property: "og:title", content: "Luxury Residences & Home Interiors | Top Design" },
       { property: "og:description", content: "Bespoke luxury home interiors in Gurugram — modular kitchens, bedrooms, living rooms and complete renovations." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -14,7 +14,7 @@ export const Route = createFileRoute("/home-designer")({
   }),
   component: () => (
     <PageShell>
-      <PageHero eyebrow="Home Designer" plain="Luxury Homes," accent="Crafted for You" text="Bespoke luxury home interiors in Gurugram — modular kitchens, bedrooms, living rooms and complete renovations." img={IMG.home} /><section className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-24 lg:px-12"><ServiceFeature k="home" /></section><TextMarquee /><Tech3D /><FeaturedProjects /><Testimonials /><CTA />
+      <PageHero eyebrow="Residences" plain="Luxury Homes," accent="Crafted for You" text="Bespoke luxury home interiors in Gurugram — modular kitchens, bedrooms, living rooms and complete renovations." img={IMG.home} /><section className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-24 lg:px-12"><ServiceFeature k="home" /></section><TextMarquee /><Tech3D /><FeaturedProjects /><Testimonials /><CTA />
     </PageShell>
   ),
 });
