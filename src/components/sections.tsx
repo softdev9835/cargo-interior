@@ -5,7 +5,7 @@ import { AnimatePresence, motion, useInView } from "framer-motion";
 import { Menu, X, Star, MapPin, Phone, Mail, ChevronLeft, ChevronRight, Check, Lightbulb, Layers, Gem, Compass, Award, FileText, ArrowRight, ChevronDown, Plus } from "lucide-react";
 import { EASE, Eyebrow, GoldButton, Img, MixedHeading, Reveal, Section, SectionHeader } from "@/components/lux";
 
-const C = "https://cargointerior.in/assets/";
+const C = "/assets/";
 export { CONTACT_INFO, PHONE, TEL, EMAIL, MAILTO, ADDRESS, WA, getWhatsAppUrl } from "@/config/contact";
 import { CONTACT_INFO, PHONE, TEL, EMAIL, MAILTO, ADDRESS, WA, getWhatsAppUrl } from "@/config/contact";
 
@@ -79,9 +79,6 @@ export function Navbar() {
                   }`}
                 >
                   {n}
-                  {/* {isActive && (
-                    <span className="absolute inset-x-2.5 bottom-0 h-[2px] rounded-full bg-gold shadow-[0_0_8px_rgba(212,175,55,0.7)] 2xl:inset-x-3.5" />
-                  )} */}
                 </Link>
               </li>
             );
@@ -730,6 +727,84 @@ export function Contact() {
               </>
             )}
           </form>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+export function LocationMap() {
+  return (
+    <section className="relative overflow-hidden pb-20 pt-4 sm:pb-28">
+      <div className="relative mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
+        <Reveal>
+          <div className="mb-8 flex flex-col items-start justify-between gap-4 md:flex-row md:items-end">
+            <div>
+              <Eyebrow>Studio Location</Eyebrow>
+              <MixedHeading plain="Visit Our" accent="Design Experience Center" />
+              <p className="mt-3 max-w-xl text-sm font-light text-muted-foreground sm:text-base">
+                Located on Vikas Marg, Laxmi Nagar. Walk in for a personalized consultation or project walkthrough.
+              </p>
+            </div>
+            <a
+              href={CONTACT_INFO.googleMapsQueryUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 rounded-xl border border-gold/40 bg-gold/10 px-5 py-3 text-xs font-bold uppercase tracking-wider text-gold transition-all duration-300 hover:border-gold hover:bg-gold hover:text-primary-foreground"
+            >
+              <Compass className="h-4 w-4" />
+              <span>Get Directions</span>
+            </a>
+          </div>
+        </Reveal>
+
+        <Reveal delay={0.15}>
+          <div className="group relative overflow-hidden rounded-3xl border border-gold/30 bg-surface/80 p-2 shadow-2xl backdrop-blur-xl transition-all duration-500 hover:border-gold/60">
+            {/* Ambient luxury glow effect */}
+            <div
+              aria-hidden
+              className="pointer-events-none absolute -inset-1 rounded-3xl bg-gradient-to-r from-gold/10 via-transparent to-gold/10 opacity-50 blur-xl transition-opacity duration-500 group-hover:opacity-100"
+            />
+
+            {/* Themed Dark Mode Google Map - 100% Unobstructed */}
+            <div className="relative h-[400px] w-full overflow-hidden rounded-2xl sm:h-[480px] lg:h-[520px]">
+              <iframe
+                title="Top Design Location Map"
+                src="https://maps.google.com/maps?q=E%2059%2C%20Vikas%20Marg%2C%20near%20hira%20sweets%2C%20Veer%20Savarkar%20Block%2C%20Block%20G%2C%20Laxmi%20Nagar%2C%20Delhi%2C%20110092&t=&z=16&ie=UTF8&iwloc=&output=embed"
+                width="100%"
+                height="100%"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="h-full w-full border-0 transition-all duration-700 invert-[92%] hue-rotate-[180deg] contrast-[95%] brightness-[85%] grayscale-[25%]"
+              />
+              {/* Subtle gold vignette on top of the map */}
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/40 via-transparent to-background/20"
+              />
+            </div>
+
+            {/* Studio Info Bar below map (no overlapping on map) */}
+            <div className="mt-2 flex flex-col gap-3 rounded-2xl border border-gold/15 bg-background/70 px-5 py-4 backdrop-blur-md sm:flex-row sm:items-center sm:justify-between sm:px-6">
+              <div className="flex items-start gap-2.5 text-xs font-light text-foreground/90 sm:text-sm">
+                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-gold" />
+                <span className="leading-relaxed">{ADDRESS}</span>
+              </div>
+              <div className="flex shrink-0 items-center gap-4 text-xs">
+                <span className="inline-flex items-center gap-1.5 text-muted-foreground">
+                  <span className="h-2 w-2 rounded-full bg-emerald-400" /> Mon – Sat
+                </span>
+                <a
+                  href={CONTACT_INFO.googleMapsQueryUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1 font-medium text-gold underline underline-offset-4 hover:text-foreground"
+                >
+                  Open in Google Maps <ArrowRight className="h-3.5 w-3.5" />
+                </a>
+              </div>
+            </div>
+          </div>
         </Reveal>
       </div>
     </section>
