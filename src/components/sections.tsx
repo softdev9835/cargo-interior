@@ -37,9 +37,9 @@ const NAV = [
 
 function Logo() {
   return (
-    <Link to="/" className="shrink-0 font-serif text-lg font-bold leading-tight tracking-wide sm:text-xl" aria-label="Cargo Interiors home">
-      <span className="block text-foreground">CARGO</span>
-      <span className="block text-gold">INTERIORS</span>
+    <Link to="/" className="shrink-0 font-serif text-lg font-bold leading-tight tracking-wide sm:text-xl" aria-label="Top Design home">
+      <span className="block text-foreground">TOP</span>
+      <span className="block text-gold">DESIGN</span>
     </Link>
   );
 }
@@ -172,11 +172,11 @@ export function Hero() {
   return (
     <section className="relative flex min-h-[100svh] items-center justify-center overflow-hidden">
       <motion.div className="absolute inset-0" initial={{ scale: 1.12 }} animate={{ scale: 1 }} transition={{ duration: 2.2, ease: EASE }}>
-        <img src={IMG.hero} alt="Premium showroom interior by Cargo Interiors" className="h-full w-full object-cover" fetchPriority="high" />
+        <img src={IMG.hero} alt="Premium showroom interior by Top Design" className="h-full w-full object-cover" fetchPriority="high" />
       </motion.div>
       <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/55 to-background" />
       <div className="relative mx-auto w-full max-w-6xl px-5 pb-28 pt-28 text-center sm:px-8">
-        <motion.p initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: EASE, delay: 0.2 }} className="tracked text-[10px] text-gold sm:text-sm">Best Interior Designer in Gurugram</motion.p>
+        <motion.p initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: EASE, delay: 0.2 }} className="tracked text-[10px] text-gold sm:text-sm">Best Interior Designer in Delhi</motion.p>
         <h1 className="mt-5 font-serif font-bold leading-[1.05] text-[2.5rem] sm:text-6xl lg:text-7xl xl:text-[5.5rem]">
           {["We Design Spaces That", "Sell, Scale & Impress"].map((l, k) => (
             <span key={l} className="block overflow-hidden pb-2">
@@ -185,7 +185,7 @@ export function Hero() {
           ))}
         </h1>
         <Reveal delay={0.7}>
-          <p className="mx-auto mt-6 max-w-2xl text-base text-foreground/90 sm:text-xl">Showrooms that convert. Offices that inspire. Your trusted interior designer in Gurugram for spaces engineered for business impact.</p>
+          <p className="mx-auto mt-6 max-w-2xl text-base text-foreground/90 sm:text-xl">Showrooms that convert. Offices that inspire. Your trusted interior designer in Delhi for spaces engineered for business impact.</p>
           <div className="mt-10 flex flex-col items-stretch justify-center gap-4 sm:flex-row sm:items-center">
             <a href={WA} target="_blank" rel="noreferrer" className="inline-flex min-h-14 items-center justify-center rounded-xl bg-gold px-10 text-xs font-bold tracked text-primary-foreground transition-all duration-500 ease-lux hover:-translate-y-0.5 hover:shadow-[0_10px_30px_-10px_var(--gold)] sm:text-sm">Book a Consultation</a>
             <a href={TEL} className="inline-flex min-h-14 items-center justify-center rounded-xl border border-gold px-10 text-xs font-bold tracked text-gold transition-colors hover:bg-gold hover:text-primary-foreground sm:text-sm">Call Now</a>
@@ -271,12 +271,12 @@ export function Stats() {
 
 export function About() {
   return (
-    <Section watermark="CARGO">
+    <Section watermark="TOP DESIGN">
       <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
         <Reveal>
           <Eyebrow>The Brand</Eyebrow>
           <MixedHeading plain="We Don't Decorate." accent="We Engineer Experiences." />
-          <p className="mt-6 text-base font-light leading-relaxed text-muted-foreground sm:text-lg">Founded in 2015 in Gurugram, Cargo Interiors is not your typical design firm. As a leading interior designer in Gurugram, we are strategic space planners who understand that every square foot is an asset — and every design decision impacts your bottom line.</p>
+          <p className="mt-6 text-base font-light leading-relaxed text-muted-foreground sm:text-lg">Founded in 2015 in Delhi NCR, Top Design is not your typical design firm. As a leading interior designer in Delhi NCR, we are strategic space planners who understand that every square foot is an asset — and every design decision impacts your bottom line.</p>
           <p className="mt-4 text-base font-light leading-relaxed text-muted-foreground">From branded showrooms that turn walk-ins into buyers, to offices that attract top talent — we design with purpose, precision, and an obsession for premium execution. Led by Azam Saifi, our 80+ member team has delivered over 100 high-value projects across 15+ cities.</p>
           <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
             <GoldButton href="/about">Learn More About Us</GoldButton>
@@ -288,7 +288,7 @@ export function About() {
           <div className="relative aspect-[4/5] overflow-hidden rounded-3xl border-8 border-surface"><Img src={IMG.building} alt="Premium commercial building exterior design in Gurgaon" /></div>
           <div className="glass absolute -bottom-6 left-4 rounded-2xl px-5 py-4 sm:-left-6">
             <div className="font-serif text-xl font-bold text-gold">Since 2015</div>
-            <div className="tracked mt-1 text-[10px] text-muted-foreground">Gurugram, Haryana</div>
+            <div className="tracked mt-1 text-[10px] text-muted-foreground">Laxmi Nagar, Delhi</div>
           </div>
         </Reveal>
       </div>
@@ -309,7 +309,7 @@ export function ServiceFeature({ k, flip = false }: { k: ServiceKey; flip?: bool
   return (
     <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-16">
       <Reveal className={`aspect-[4/3] overflow-hidden rounded-3xl border border-border ${flip ? "lg:order-2" : ""}`}>
-        <Img src={s.img} alt={`${s.t} in Gurugram`} className="transition-transform duration-700 ease-lux hover:scale-105" />
+        <Img src={s.img} alt={`${s.t} in Delhi`} className="transition-transform duration-700 ease-lux hover:scale-105" />
       </Reveal>
       <Reveal delay={0.1}>
         <span className="tracked text-[10px] font-bold text-gold">Primary Focus</span>
@@ -410,7 +410,7 @@ export function ProjectCard({ p }: { p: (typeof PROJECTS)[number] }) {
   return (
     <article className="group">
       <div className="aspect-[4/3] overflow-hidden rounded-lg">
-        <Img src={p.s} alt={`${p.t} - interior design project in Gurugram`} className="transition-transform duration-700 ease-lux group-hover:scale-105" />
+        <Img src={p.s} alt={`${p.t} - interior design project in Delhi`} className="transition-transform duration-700 ease-lux group-hover:scale-105" />
       </div>
       <div className="tracked mt-5 text-[11px] text-gold">{p.c}</div>
       <h3 className="mt-2 text-xl sm:text-2xl">{p.t}</h3>
@@ -457,8 +457,8 @@ export function FeaturedProjects({ all = false }: { all?: boolean }) {
 }
 
 const REVIEWS = [
-  { q: "Cargo Interiors transformed our showroom into a space that sells itself. Walk-in conversions went up 35% within the first month. They understand business, not just design.", n: "Rajiv Mehta", r: "Retail Brand Owner, Gurugram" },
-  { q: "Our new office became a recruiting tool. Candidates walk in and immediately want to work here. The Cargo team delivered on time, on budget, and beyond expectations.", n: "Priya Sharma", r: "Founder & CEO, Tech Startup" },
+  { q: "Top Design transformed our showroom into a space that sells itself. Walk-in conversions went up 35% within the first month. They understand business, not just design.", n: "Rajiv Mehta", r: "Retail Brand Owner, Delhi NCR" },
+  { q: "Our new office became a recruiting tool. Candidates walk in and immediately want to work here. The Top Design team delivered on time, on budget, and beyond expectations.", n: "Priya Sharma", r: "Founder & CEO, Tech Startup" },
   { q: "From concept to execution, their professionalism was unmatched. They handled everything — materials, contractors, timelines. We just watched our restaurant come to life.", n: "Khadak Singh", r: "Restaurant Owner, Delhi NCR" },
 ];
 
@@ -492,8 +492,8 @@ export function Testimonials() {
 
 const FAQS = [
   {
-    q: "What types of projects does Cargo Interiors handle?",
-    a: "We specialize in end-to-end luxury commercial and residential interiors across Gurugram and Delhi NCR — including retail showrooms, corporate offices, restaurants & cafes, healthcare clinics, and bespoke turnkey residences.",
+    q: "What types of projects does Top Design handle?",
+    a: "We specialize in end-to-end luxury commercial and residential interiors across Delhi NCR — including retail showrooms, corporate offices, restaurants & cafes, healthcare clinics, and bespoke turnkey residences.",
   },
   {
     q: "How does the design process work?",
@@ -509,7 +509,7 @@ const FAQS = [
   },
   {
     q: "Which cities do you operate in?",
-    a: "Our headquarters and design studio are located in Gurugram. We actively execute projects throughout Gurugram (Golf Course Road, Cyber City, Sohna Road), South Delhi, Noida, and across the Delhi NCR region.",
+    a: "Our headquarters and design studio are located in Laxmi Nagar, Delhi. We actively execute projects throughout Delhi NCR (Laxmi Nagar, South Delhi, Noida, Gurugram) and across the region.",
   },
   {
     q: "How do I get started?",
@@ -656,7 +656,7 @@ export function Contact() {
           <form onSubmit={(e) => {
             e.preventDefault();
             const f = new FormData(e.currentTarget);
-            const msg = `Hi Cargo Interiors! I'm ${f.get("name")} (${f.get("phone")}). Service: ${f.get("service") || "-"}. ${f.get("message") || ""}`;
+            const msg = `Hi Top Design! I'm ${f.get("name")} (${f.get("phone")}). Service: ${f.get("service") || "-"}. ${f.get("message") || ""}`;
             window.open(getWhatsAppUrl(msg), "_blank");
             setSent(true);
           }} className="glass space-y-4 rounded-3xl p-5 sm:p-8">
@@ -742,7 +742,7 @@ export function Footer() {
       <div className="mx-auto grid max-w-7xl gap-10 px-5 sm:grid-cols-2 sm:px-8 lg:grid-cols-4 lg:px-12">
         <div>
           <Logo />
-          <p className="mt-4 max-w-xs text-sm font-light text-muted-foreground">Leading interior designer in Gurugram since 2015. Showrooms, offices, restaurants and luxury homes.</p>
+          <p className="mt-4 max-w-xs text-sm font-light text-muted-foreground">Leading interior designer in Delhi NCR since 2015. Showrooms, offices, restaurants and luxury homes.</p>
         </div>
         <div>
           <h4 className="tracked font-sans text-xs font-bold text-gold">Services</h4>
@@ -760,8 +760,8 @@ export function Footer() {
         </div>
       </div>
       <div className="mx-auto mt-12 flex max-w-7xl flex-col gap-2 border-t border-border px-5 py-6 text-xs text-muted-foreground sm:flex-row sm:justify-between sm:px-8 lg:px-12">
-        <span>© {new Date().getFullYear()} Cargo Interiors. All rights reserved.</span>
-        <span>Best Interior Designer in Gurugram</span>
+        <span>© {new Date().getFullYear()} Top Design. All rights reserved.</span>
+        <span>Best Interior Designer in Laxmi Nagar, Delhi</span>
       </div>
     </footer>
   );
@@ -788,7 +788,7 @@ export function PageShell({ children }: { children: React.ReactNode }) {
       {children}
       <Footer />
       <div className="fixed bottom-4 right-4 z-40 flex flex-col gap-3 sm:bottom-6 sm:right-6">
-        <a href={TEL} aria-label="Call Cargo Interiors" className="grid h-12 w-12 place-items-center rounded-full bg-gold text-primary-foreground shadow-lg transition-transform hover:scale-105"><Phone className="h-6 w-6" /></a>
+        <a href={TEL} aria-label="Call Top Design" className="grid h-12 w-12 place-items-center rounded-full bg-gold text-primary-foreground shadow-lg transition-transform hover:scale-105"><Phone className="h-6 w-6" /></a>
         <a href={WA} target="_blank" rel="noreferrer" aria-label="Chat on WhatsApp" className="grid h-12 w-12 place-items-center rounded-full bg-whatsapp text-foreground shadow-lg transition-transform hover:scale-105">
           <svg viewBox="0 0 24 24" className="h-6 w-6" fill="currentColor" aria-hidden><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1s-.5-.1-.7.1-.8 1-1 1.2-.4.2-.7.1a8 8 0 0 1-4-3.5c-.3-.5.3-.5.9-1.6.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6a1.2 1.2 0 0 0-.9.4 3.7 3.7 0 0 0-1.1 2.8 6.5 6.5 0 0 0 1.3 3.4 14.6 14.6 0 0 0 5.6 5c2.1.9 2.9 1 4 .8a3.4 3.4 0 0 0 2.2-1.6 2.8 2.8 0 0 0 .2-1.6c-.1-.1-.3-.2-.6-.3zM12 21.8a9.8 9.8 0 0 1-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4A9.8 9.8 0 1 1 12 21.8zm8.4-18.2A11.8 11.8 0 0 0 1.8 17.8L.1 24l6.3-1.7a11.8 11.8 0 0 0 5.6 1.4A11.8 11.8 0 0 0 20.4 3.6z" /></svg>
         </a>

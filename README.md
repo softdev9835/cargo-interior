@@ -1,6 +1,6 @@
-# Cargo Interiors
+# Top Design
 
-Luxury interior design studio in Gurugram.
+Interior design studio & graphic design.
 
 ## Development
 

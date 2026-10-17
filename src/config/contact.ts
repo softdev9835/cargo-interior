@@ -6,41 +6,42 @@
  */
 export const CONTACT_INFO = {
   // Brand & Business Details
-  brandName: "Cargo Interiors",
+  brandName: "Top Design",
   foundingYear: "2015",
-  tagline: "Best Interior Designer in Gurugram",
+  tagline: "Best Interior Designer in Laxmi Nagar, Delhi",
 
   // Phone
-  phone: "+91 90506 56162",
-  phoneRaw: "+919050656162",
-  phoneDigits: "919050656162",
-  telLink: "tel:+919050656162",
+  phone: "+91 92660 41927",
+  phoneRaw: "+919266041927",
+  phoneDigits: "9266041927",
+  telLink: "tel:+919266041927",
 
   // Email
-  email: "contact@cargointerior.in",
-  mailLink: "mailto:contact@cargointerior.in",
+  email: "support@topdesign.co.in",
+  mailLink: "mailto:support@topdesign.co.in",
 
   // WhatsApp
-  whatsappNumber: "919050656162",
+  whatsappNumber: "9266041927",
   defaultWhatsAppMessage:
-    "Hi, Cargo Interiors! I wanted to discuss about some interior designing project, Please reply. Thanks!",
+    "Hi, Top Design! I wanted to discuss about some interior designing project, Please reply. Thanks!",
   getWhatsAppUrl: (customMessage?: string) => {
     const text =
       customMessage ||
-      "Hi, Cargo Interiors! I wanted to discuss about some interior designing project, Please reply. Thanks!";
-    return `https://wa.me/919050656162?text=${encodeURIComponent(text)}`;
+      "Hi, Top Design! I wanted to discuss about some interior designing project, Please reply. Thanks!";
+    return `https://wa.me/919266041927?text=${encodeURIComponent(text)}`;
   },
 
   // Address & Location
-  address: "Badshahpur, Teekli Road, Gurugram, Haryana 122101",
-  shortAddress: "Badshahpur, Gurugram",
-  streetAddress: "Badshahpur, Teekli Road",
-  locality: "Gurugram",
-  region: "Haryana",
-  postalCode: "122101",
+  address: "E 59, Vikas Marg, near hira sweets, Veer Savarkar Block, Block G, Laxmi Nagar, Delhi, 110092, India",
+  shortAddress: "Laxmi Nagar, Delhi",
+  streetAddress: "E 59, Vikas Marg, near hira sweets, Veer Savarkar Block, Block G",
+  locality: "Laxmi Nagar",
+  region: "Delhi",
+  postalCode: "110092",
   country: "IN",
   googleMapsQueryUrl:
-    "https://maps.google.com/?q=Badshahpur,+Teekli+Road,+Gurugram,+Haryana+122101",
+    "https://maps.google.com/?q=E+59,+Vikas+Marg,+near+hira+sweets,+Veer+Savarkar+Block,+Block+G,+Laxmi+Nagar,+Delhi,+110092,+India",
+  website: "https://topdesign.co.in",
 } as const;
 
 // Convenience re-exports

@@ -2,8 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { PageShell, Hero, ClientsMarquee, Stats, About, TextMarquee, ServicesShowcase, WhyUs, Tech3D, FeaturedProjects, Testimonials, FAQ, CTA, IMG } from "@/components/sections";
 import { CONTACT_INFO } from "@/config/contact";
 
-const TITLE = "Cargo Interiors — Best Interior Designer in Gurugram";
-const DESC = "We design spaces that sell, scale & impress. Showroom, office, restaurant and home interiors in Gurugram since 2015.";
+const TITLE = "Top Design — Best Interior Designer in Delhi NCR";
+const DESC = "We design spaces that sell, scale & impress. Showroom, office, restaurant and home interiors in Delhi NCR since 2015.";
 
 export const Route = createFileRoute("/")({
   head: () => ({

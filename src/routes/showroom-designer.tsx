@@ -4,9 +4,9 @@ import { PageShell, PageHero, IMG, ServiceFeature, TextMarquee, Tech3D, Featured
 export const Route = createFileRoute("/showroom-designer")({
   head: () => ({
     meta: [
-      { title: "Showroom Interior Designer in Gurugram | Cargo Interiors" },
-      { name: "description", content: "Showroom interiors rooted in customer psychology that increase dwell time and conversions. Retail design in Gurugram." },
-      { property: "og:title", content: "Showroom Interior Designer in Gurugram | Cargo Interiors" },
+      { title: "Showroom Interior Designer | Top Design" },
+      { name: "description", content: "Showroom interiors rooted in customer psychology that increase dwell time and conversions. Retail design." },
+      { property: "og:title", content: "Showroom Interior Designer | Top Design" },
       { property: "og:description", content: "Showroom interiors rooted in customer psychology that increase dwell time and conversions. Retail design in Gurugram." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

@@ -4,9 +4,9 @@ import { PageShell, PageHero, IMG, ServiceFeature, TextMarquee, Tech3D, Featured
 export const Route = createFileRoute("/office-designer")({
   head: () => ({
     meta: [
-      { title: "Office Interior Designer in Gurugram | Cargo Interiors" },
-      { name: "description", content: "Office interiors that boost productivity, impress clients and reinforce your brand. Corporate office design in Gurugram." },
-      { property: "og:title", content: "Office Interior Designer in Gurugram | Cargo Interiors" },
+      { title: "Office Interior Designer | Top Design" },
+      { name: "description", content: "Office interiors that boost productivity, impress clients and reinforce your brand." },
+      { property: "og:title", content: "Office Interior Designer | Top Design" },
       { property: "og:description", content: "Office interiors that boost productivity, impress clients and reinforce your brand. Corporate office design in Gurugram." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

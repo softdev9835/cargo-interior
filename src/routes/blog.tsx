@@ -14,9 +14,9 @@ const POSTS = [
 export const Route = createFileRoute("/blog")({
   head: () => ({
     meta: [
-      { title: "Blog — Interior Design Insights | Cargo Interiors" },
-      { name: "description", content: "Interior design ideas and guides for showrooms, offices, restaurants and homes from Cargo Interiors, Gurugram." },
-      { property: "og:title", content: "Blog — Interior Design Insights | Cargo Interiors" },
+      { title: "Blog — Interior Design Insights | Top Design" },
+      { name: "description", content: "Interior design ideas and guides for showrooms, offices, restaurants and homes from Top Design." },
+      { property: "og:title", content: "Blog — Interior Design Insights | Top Design" },
       { property: "og:description", content: "Interior design ideas and guides for showrooms, offices, restaurants and homes." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

@@ -74,8 +74,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Cargo Interiors" },
-      { name: "description", content: "Luxury interior design studio in Gurugram." },
+      { title: "Top Design" },
+      { name: "description", content: "Luxury interior design studio in Delhi NCR." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "theme-color", content: "#0A0A0A" },
@@ -108,7 +108,7 @@ function RootShell({ children }: { children: ReactNode }) {
       <head>
         <HeadContent />
       </head>
-      <body>
+      <body className="selection:text-white selection:bg-primary">
         {children}
         <Scripts />
       </body>

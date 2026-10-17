@@ -4,10 +4,10 @@ import { PageShell, PageHero, IMG, ServicesShowcase, ServiceFeature, WhyUs, Tech
 export const Route = createFileRoute("/interior-designer")({
   head: () => ({
     meta: [
-      { title: "Interior Designer in Gurugram | Cargo Interiors" },
-      { name: "description", content: "Cargo Interiors — leading interior designer in Gurugram for showrooms, offices, restaurants and homes. Design + execution, end to end." },
-      { property: "og:title", content: "Interior Designer in Gurugram | Cargo Interiors" },
-      { property: "og:description", content: "Cargo Interiors — leading interior designer in Gurugram for showrooms, offices, restaurants and homes. Design + execution, end to end." },
+      { title: "Interior Designer | Top Design" },
+      { name: "description", content: "Top Design — leading interior designer for showrooms, offices, restaurants and homes. Design + execution, end to end." },
+      { property: "og:title", content: "Interior Designer | Top Design" },
+      { property: "og:description", content: "Top Design — leading interior designer for showrooms, offices, restaurants and homes. Design + execution, end to end." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],

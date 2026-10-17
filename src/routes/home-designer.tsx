@@ -4,9 +4,9 @@ import { PageShell, PageHero, IMG, ServiceFeature, TextMarquee, Tech3D, Featured
 export const Route = createFileRoute("/home-designer")({
   head: () => ({
     meta: [
-      { title: "Home Interior Designer in Gurugram | Cargo Interiors" },
-      { name: "description", content: "Bespoke luxury home interiors in Gurugram — modular kitchens, bedrooms, living rooms and complete renovations." },
-      { property: "og:title", content: "Home Interior Designer in Gurugram | Cargo Interiors" },
+      { title: "Home Interior Designer | Top Design" },
+      { name: "description", content: "Bespoke luxury home interiors — modular kitchens, bedrooms, living rooms and complete renovations." },
+      { property: "og:title", content: "Home Interior Designer | Top Design" },
       { property: "og:description", content: "Bespoke luxury home interiors in Gurugram — modular kitchens, bedrooms, living rooms and complete renovations." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

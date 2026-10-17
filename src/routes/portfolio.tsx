@@ -4,10 +4,10 @@ import { PageShell, PageHero, IMG, FeaturedProjects, Stats, ClientsMarquee, CTA 
 export const Route = createFileRoute("/portfolio")({
   head: () => ({
     meta: [
-      { title: "Portfolio — Interior Design Projects in Gurugram | Cargo Interiors" },
-      { name: "description", content: "Explore Cargo Interiors' showroom, office, restaurant and home interior projects across Gurugram and 15+ cities." },
-      { property: "og:title", content: "Portfolio — Interior Design Projects in Gurugram | Cargo Interiors" },
-      { property: "og:description", content: "Explore Cargo Interiors' showroom, office, restaurant and home interior projects across Gurugram and 15+ cities." },
+      { title: "Portfolio — Interior Design Projects | Top Design" },
+      { name: "description", content: "Explore Top Design's showroom, office, restaurant and home interior projects across 15+ cities." },
+      { property: "og:title", content: "Portfolio — Interior Design Projects | Top Design" },
+      { property: "og:description", content: "Explore Top Design's showroom, office, restaurant and home interior projects across 15+ cities." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],

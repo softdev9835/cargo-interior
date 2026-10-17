@@ -4,10 +4,10 @@ import { PageShell, PageHero, IMG, About, Stats, WhyUs, ClientsMarquee, Testimon
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About Us | Cargo Interiors" },
-      { name: "description", content: "Founded in 2015 by Azam Saifi, Cargo Interiors is a Gurugram interior design and execution firm with 80+ professionals and 100+ projects." },
-      { property: "og:title", content: "About Us | Cargo Interiors" },
-      { property: "og:description", content: "Founded in 2015 by Azam Saifi, Cargo Interiors is a Gurugram interior design and execution firm with 80+ professionals and 100+ projects." },
+      { title: "About Us | Top Design" },
+      { name: "description", content: "Founded in 2015 by Azam Saifi, Top Design is a premier interior design and execution firm with 80+ professionals and 100+ projects." },
+      { property: "og:title", content: "About Us | Top Design" },
+      { property: "og:description", content: "Founded in 2015 by Azam Saifi, Top Design is a premier interior design and execution firm with 80+ professionals and 100+ projects." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
